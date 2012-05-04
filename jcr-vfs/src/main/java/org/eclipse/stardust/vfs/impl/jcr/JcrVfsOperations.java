@@ -46,8 +46,10 @@ import javax.jcr.version.VersionIterator;
 import javax.jcr.version.VersionManager;
 
 import org.apache.jackrabbit.api.security.user.UserManager;
+import org.apache.jackrabbit.core.ItemManager;
 import org.apache.jackrabbit.core.SessionImpl;
 import org.apache.jackrabbit.core.XASessionImpl;
+import org.apache.jackrabbit.core.id.ItemId;
 import org.apache.jackrabbit.jca.JCAManagedConnection;
 import org.apache.jackrabbit.jca.JCASessionHandle;
 import org.apache.jackrabbit.value.BooleanValue;
@@ -1324,9 +1326,19 @@ public class JcrVfsOperations
    public void createFrozenVersion(Node nFile, String versionLabel, boolean moveLabel)
          throws RepositoryException
    {
-         session.save();
-         VersionManager versionManager = session.getWorkspace().getVersionManager();
-         Version version = versionManager.checkin(nFile.getPath());
+      session.save();
+
+      // Workaround for NPE on 2nd versioning
+      VersionHistory versionHistory = nFile.getVersionHistory();
+      if (versionHistory != null)
+      {
+         ItemId versionHistoryId = ((org.apache.jackrabbit.core.version.VersionHistoryImpl) versionHistory).getId();
+         // remove from item manager cache
+         getItemManager(session).itemDestroyed(versionHistoryId, null);
+      }
+
+      VersionManager versionManager = session.getWorkspace().getVersionManager();
+      Version version = versionManager.checkin(nFile.getPath());
 
       if ( !isEmpty(versionLabel))
       {
@@ -2298,6 +2310,54 @@ public class JcrVfsOperations
       }
 
       return userManager;
+   }
+
+   private ItemManager getItemManager(Session session) throws RepositoryException
+   {
+      ItemManager itemManager = null;
+
+      if (session instanceof SessionImpl)
+      {
+         itemManager = ((SessionImpl) session).getItemManager();
+      }
+      else if (session instanceof JCASessionHandle)
+      {
+         JCAManagedConnection managedConnection = ((JCASessionHandle) session).getManagedConnection();
+         Session xaSession = managedConnection.getSession((JCASessionHandle) session);
+         if (xaSession instanceof XASessionImpl)
+         {
+            itemManager = ((XASessionImpl) xaSession).getItemManager();
+         }
+         else
+         {
+            throw new RepositoryOperationFailedException(
+                  "Expected (org.apache.jackrabbit.core.XASessionImpl) but found ("
+                        + xaSession + ")");
+         }
+      }
+      else if (session instanceof org.eclipse.stardust.vfs.jcr.jca.JCASessionHandle)
+      {
+         org.eclipse.stardust.vfs.jcr.jca.JCAManagedConnection managedConnection = ((org.eclipse.stardust.vfs.jcr.jca.JCASessionHandle) session).getManagedConnection();
+         Session xaSession = managedConnection.getSession((org.eclipse.stardust.vfs.jcr.jca.JCASessionHandle) session);
+         if (xaSession instanceof XASessionImpl)
+         {
+            itemManager = ((XASessionImpl) xaSession).getItemManager();
+         }
+         else
+         {
+            throw new RepositoryOperationFailedException(
+                  "Expected (org.apache.jackrabbit.core.XASessionImpl) but found ("
+                        + xaSession + ")");
+         }
+      }
+      else
+      {
+         throw new RepositoryOperationFailedException(
+               "Only (org.apache.jackrabbit.api.jsr283.Session), (org.apache.jackrabbit.jca.JCASessionHandle), (org.eclipse.stardust.vfs.jcr.jca.JCAManagedConnection) are supported for jcr security. Found session class ("
+                     + session + ")");
+      }
+
+      return itemManager;
    }
 
    public Node getMetaDataNode(Node nResource) throws RepositoryException
