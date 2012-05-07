@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.*;
 
@@ -545,6 +546,7 @@ public class JcrVfsOperations
          {
             doc.setName(name);
          }
+
 
          final Node nVfsMetaData = getMetaDataNode(nFile);
 
@@ -1732,6 +1734,9 @@ public class JcrVfsOperations
          case PropertyType.DOUBLE:
             return new Double(JcrProperty.getDouble(prp));
 
+         case PropertyType.DECIMAL:
+            return JcrProperty.getDecimal(prp);
+
          case PropertyType.STRING:
             return JcrProperty.getString(prp);
 
@@ -1770,6 +1775,10 @@ public class JcrVfsOperations
          else if ((value instanceof Float) || (value instanceof Double))
          {
             JcrNode.setProperty(node, name, ((Number) value).doubleValue());
+         }
+         else if (value instanceof BigDecimal)
+         {
+            JcrNode.setProperty(node, name, (BigDecimal) value);
          }
          else if (value instanceof String)
          {
@@ -1889,6 +1898,10 @@ public class JcrVfsOperations
       else if ((value instanceof Float) || (value instanceof Double))
       {
          JcrProperty.setValue(prp, ((Number) value).doubleValue());
+      }
+      else if (value instanceof BigDecimal)
+      {
+         JcrProperty.setValue(prp, (BigDecimal) value);
       }
       else if (value instanceof String)
       {

@@ -14,6 +14,7 @@
  */
 package org.eclipse.stardust.vfs.impl.spi;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -114,6 +115,12 @@ public class JcrProperty
       return property.getLong();
    }
 
+   public static BigDecimal getDecimal(Property property) throws ValueFormatException,
+         RepositoryException
+   {
+      return property.getDecimal();
+   }
+
    public static ArrayList<Long> getLongs(Property property) throws ValueFormatException,
          RepositoryException
    {
@@ -159,6 +166,13 @@ public class JcrProperty
    }
 
    public static void setValue(Property property, double value)
+         throws ValueFormatException, VersionException, LockException,
+         ConstraintViolationException, RepositoryException
+   {
+      property.setValue(value);
+   }
+
+   public static void setValue(Property property, BigDecimal value)
          throws ValueFormatException, VersionException, LockException,
          ConstraintViolationException, RepositoryException
    {

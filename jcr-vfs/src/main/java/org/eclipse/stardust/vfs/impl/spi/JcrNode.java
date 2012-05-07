@@ -14,6 +14,7 @@
  */
 package org.eclipse.stardust.vfs.impl.spi;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import javax.jcr.*;
@@ -68,6 +69,13 @@ public class JcrNode
    }
 
    public static Property setProperty(Node node, String name, double value)
+         throws ValueFormatException, VersionException, LockException,
+         ConstraintViolationException, RepositoryException
+   {
+      return node.setProperty(name, value);
+   }
+
+   public static Property setProperty(Node node, String name, BigDecimal value)
          throws ValueFormatException, VersionException, LockException,
          ConstraintViolationException, RepositoryException
    {
