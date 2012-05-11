@@ -49,6 +49,8 @@ public class VfsUtils
 
    public static final String VFS_DESCRIPTION = "description";
 
+   public static final String VFS_REVISION_COMMENT = "revisionComment";
+
    public static final String VFS_OWNER = "owner";
 
    public static final String VFS_LOCK_OWNER = "lockOwner";

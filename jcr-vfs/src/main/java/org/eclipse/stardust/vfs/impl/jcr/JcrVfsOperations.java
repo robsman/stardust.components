@@ -550,6 +550,12 @@ public class JcrVfsOperations
 
          final Node nVfsMetaData = getMetaDataNode(nFile);
 
+         if (null != nVfsMetaData)
+         {
+            doc.setRevisionComment(getStringProperty(nVfsMetaData,
+                  getVfsPropertyName(VfsUtils.VFS_REVISION_COMMENT)));
+         }
+
          updateResourceSnapshot(doc, nFile, nVfsMetaData);
 
          Node nVfsAnnotations = getVfsAttributesNode(nVfsMetaData, VfsUtils.VFS_ANNOTATIONS);
@@ -1267,7 +1273,7 @@ public class JcrVfsOperations
    }
 
    public boolean updateAttributesNode(Node nVfsAttributes,
-         final Map<String, Serializable> sourceProperties) throws RepositoryException
+         final Map<String, ? extends Serializable> sourceProperties) throws RepositoryException
    {
       boolean updated = false;
       // update custom properties
@@ -1325,9 +1331,11 @@ public class JcrVfsOperations
       return nFolder;
    }
 
-   public void createFrozenVersion(Node nFile, String versionLabel, boolean moveLabel)
+   public void createFrozenVersion(Node nFile, String versionComment, String versionLabel, boolean moveLabel)
          throws RepositoryException
    {
+      updateVersionComment(nFile, versionComment);
+
       session.save();
 
       // Workaround for NPE on 2nd versioning
@@ -1405,6 +1413,15 @@ public class JcrVfsOperations
          JcrVersionHistory.addVersionLabel(metaDataHistory,
                JcrItem.getName(frozenMetaData), getRevisionId(version), false);
       }
+   }
+
+   private void updateVersionComment(Node nFile, String versionComment) throws RepositoryException
+   {
+      MetaDataMigrationInfo metaDataInfo = migrateMetaData(nFile);
+      Node nMetaData = metaDataInfo.getMetaData();
+
+      updateProperty(nMetaData, getVfsPropertyName(VfsUtils.VFS_REVISION_COMMENT),
+            versionComment);
    }
 
    private IAccessControlPolicy getPermission(Node node, String principalName,
@@ -1613,6 +1630,62 @@ public class JcrVfsOperations
             catch (ItemNotFoundException infe)
             {
                // TODO
+            }
+         }
+         else
+         {
+            // Try to resolve parents of vfs:* nodes max. 10 levels
+            // This enables to find files even by targeting their meta data in XPath queries.
+            // e.g. /jcr:root//element(*, nt:file)/vfs:metaData/vfs:attributes/vfs:someSpecificMetaData
+            int level = 0;
+            boolean stop = false;
+            Node targetNode = null;
+            if (member.getName().startsWith(getVfsNsPrefix()))
+            {
+               try
+               {
+                  targetNode = member.getParent();
+               }
+               catch (ItemNotFoundException e)
+               {
+                  // no parent node exists
+                  stop = true;
+               }
+               while (level < 10 && !stop)
+               {
+                  if (targetNode != null)
+                  {
+                     NodeType targetNodeType = JcrNode.getPrimaryNodeType(targetNode);
+                     // only visit files
+                     if (isFrozenNode(targetNode))
+                     {
+                        stop = true;
+                     }
+                     else if (isFolder(targetNodeType))
+                     {
+                        stop = true;
+                     }
+                     else if (isFile(targetNodeType))
+                     {
+                        stop = true;
+                        visitor.visitFile(targetNode);
+                     }
+
+                     if ( !stop)
+                     {
+                        try
+                        {
+                           targetNode = targetNode.getParent();
+                        }
+                        catch (ItemNotFoundException e)
+                        {
+                           // no parent node exists
+                           stop = true;
+                        }
+                     }
+                     level++ ;
+                  }
+               }
             }
          }
       }

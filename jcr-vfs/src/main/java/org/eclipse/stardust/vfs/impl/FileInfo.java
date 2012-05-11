@@ -33,6 +33,8 @@ public class FileInfo extends AbstractResourceInfo implements IFileInfo
 
    private final Map<String, Serializable> annotations;
 
+   private String revisionComment;
+
    public FileInfo(String name)
    {
       super(name);
@@ -58,6 +60,11 @@ public class FileInfo extends AbstractResourceInfo implements IFileInfo
    {
       this.annotations.clear();
       this.annotations.putAll(annotations);
+   }
+
+   public String getRevisionComment()
+   {
+      return revisionComment;
    }
 
 }

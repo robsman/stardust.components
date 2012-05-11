@@ -35,6 +35,8 @@ public class JcrRepositoryFile extends JcrRepositoryResource implements IFile
 
    private String revisionName;
 
+   private String revisionComment;
+
    private List<String> versionLabels;
 
    private String contentType;
@@ -72,6 +74,16 @@ public class JcrRepositoryFile extends JcrRepositoryResource implements IFile
    void setRevisionName(String versionName)
    {
       this.revisionName = versionName;
+   }
+
+   public String getRevisionComment()
+   {
+      return revisionComment;
+   }
+
+   void setRevisionComment(String versionComment)
+   {
+      this.revisionComment = versionComment;
    }
 
    public List<String> getVersionLabels()

@@ -450,7 +450,6 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
 
             Node nFile = jcrVfs.addFile(nFolder, file, content, encoding);
 
-            // TODO
             return jcrVfs.getFileSnapshot(nFile);
          }
       });
@@ -470,7 +469,6 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
 
                   Node nFile = jcrVfs.addFile(nFolder, file, contentFileId);
 
-                  // TODO
                   return jcrVfs.getFileSnapshot(nFile);
                }
             });
@@ -480,20 +478,23 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
    public IFile createFileVersion(final String fileId, final String versionLabel,
          final boolean moveLabel)
    {
+      return createFileVersion(fileId, versionLabel, null, moveLabel);
+   }
+
+   public IFile createFileVersion(final String fileId, final String versionLabel,
+         final String versionComment, final boolean moveLabel)
+   {
       return doWithJcrVfs(new JcrVfsFunction<IFile>()
       {
          public IFile withJcrVfs(JcrVfsOperations jcrVfs) throws RepositoryException
          {
             Node nFile = jcrVfs.findFile(fileId);
 
-            // TODO if target is already a version, just apply label
-
             jcrVfs.ensureVersioningIsEnabled(nFile);
             JcrVfsOperations.ensureVersionIsModifiable(nFile);
 
-            jcrVfs.createFrozenVersion(nFile, versionLabel, moveLabel);
+            jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, moveLabel);
 
-            // TODO
             return jcrVfs.getFileSnapshot(nFile);
          }
       });
@@ -516,12 +517,18 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
    public IFile updateFile(final IFile file, final InputStream content,
          final String encoding, final boolean version, final boolean keepLocked)
    {
-      return updateFile(file, content, encoding, version, null, keepLocked);
+      return updateFile(file, content, encoding, version, null, null, keepLocked);
+   }
+
+   public IFile updateFile(final IFile file, final InputStream content,
+         final String encoding, final boolean version, final String versionLabel, final boolean keepLocked)
+   {
+      return updateFile(file, content, encoding, version, null, versionLabel, keepLocked);
    }
 
 
    public IFile updateFile(final IFile file, final InputStream content,
-         final String encoding, final boolean version, final String versionLabel, final boolean keepLocked)
+         final String encoding, final boolean version, final String versionComment, final String versionLabel, final boolean keepLocked)
    {
       // TODO implement fully
       if (keepLocked)
@@ -544,10 +551,9 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
 
             if (version)
             {
-               jcrVfs.createFrozenVersion(nFile, versionLabel, false);
+               jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, false);
             }
 
-            // TODO
             return jcrVfs.getFileSnapshot(nFile);
          }
       });
@@ -559,7 +565,15 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
       return updateFile(file, contentFileId, version, null, keepLocked);
    }
 
-   public IFile updateFile(final IFile file, final String contentFileId, final boolean version, final String versionLabel, boolean keepLocked)
+   public IFile updateFile(final IFile file, final String contentFileId,
+         final boolean version, final String versionLabel, boolean keepLocked)
+   {
+      return updateFile(file, contentFileId, version, null, versionLabel, keepLocked);
+   }
+
+   public IFile updateFile(final IFile file, final String contentFileId,
+         final boolean version, final String versionComment, final String versionLabel,
+         boolean keepLocked)
    {
       // TODO implement fully
       if (keepLocked)
@@ -583,10 +597,9 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
 
             if (version)
             {
-               jcrVfs.createFrozenVersion(nFile, versionLabel, false);
+               jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, false);
             }
 
-            // TODO
             return jcrVfs.getFileSnapshot(nFile);
          }
       });
@@ -932,10 +945,6 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
                   jcrVfs.removeNodeVersionByRevision(nFile, fileRevisionId);
                }
             }
-//            else
-//            {
-//               throw new ItemNotFoundException("Item not found " + fileId);
-//            }
          }
       });
    }

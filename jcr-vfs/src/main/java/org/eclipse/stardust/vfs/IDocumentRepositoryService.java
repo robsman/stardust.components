@@ -160,12 +160,17 @@ public interface IDocumentRepositoryService
    IFile createFile(IFolder folder, IFileInfo file, String contentFileId);
 
    /**
-    * @deprecated Replaced by {@link #createFileVersion(String, String, boolean)}
+    * @deprecated Replaced by {@link #createFileVersion(String, String, String, boolean)}
     */
    @Deprecated
    IFile versionizeFile(String fileId);
 
+   /**
+    * @deprecated Replaced by {@link #createFileVersion(String, String, String, boolean)}
+    */
    IFile createFileVersion(String fileId, String versionLabel, boolean moveLabel);
+
+   IFile createFileVersion(String fileId, String versionComment, String versionLabel, boolean moveLabel);
 
    /**
     * @deprecated Replaced by {@link #createFileVersion(IFile, String, boolean)}
@@ -185,37 +190,57 @@ public interface IDocumentRepositoryService
    IFile unlockFile(IFile file);
 
    /**
-    * @deprecated Replaced by {@link #updateFile(IFile, boolean, String, boolean)}
+    * @deprecated Replaced by {@link #updateFile(IFile, boolean, String, String, boolean)}
     */
    IFile updateFile(IFile file, boolean version, boolean keepLocked);
 
+   /**
+    * @deprecated Replaced by {@link #updateFile(IFile, boolean, String, String, boolean)}
+    */
    IFile updateFile(IFile file, boolean version, String versionLabel, boolean keepLocked);
 
+   IFile updateFile(IFile file, boolean version, String versionComment, String versionLabel, boolean keepLocked);
+
    /**
-    * @deprecated Replaced by {@link #updateFile(IFile, byte[], String, boolean, String, boolean)}
+    * @deprecated Replaced by {@link #updateFile(IFile, byte[], String, boolean, String, String, boolean)}
     */
    IFile updateFile(IFile file, byte[] content, String encoding, boolean version,
          boolean keepLocked);
-
+   /**
+    * @deprecated Replaced by {@link #updateFile(IFile, byte[], String, boolean, String, String, boolean)}
+    */
    IFile updateFile(IFile file, byte[] content, String encoding, boolean version, String versionLabel,
          boolean keepLocked);
 
+   IFile updateFile(IFile file, byte[] content, String encoding, boolean version,
+         String versionComment, String versionLabel, boolean keepLocked);
+
    /**
-    * @deprecated Replaced by {@link #updateFile(IFile, InputStream, String, boolean, String, boolean)}
+    * @deprecated Replaced by {@link #updateFile(IFile, InputStream, String, boolean, String, String, boolean)}
     */
    IFile updateFile(IFile file, InputStream content, String encoding, boolean version,
          boolean keepLocked);
-
+   /**
+    * @deprecated Replaced by {@link #updateFile(IFile, InputStream, String, boolean, String, String, boolean)}
+    */
    IFile updateFile(IFile file, InputStream content, String encoding, boolean version, String versionLabel,
          boolean keepLocked);
 
+   IFile updateFile(IFile file, InputStream content, String encoding, boolean version, String versionComment, String versionLabel,
+         boolean keepLocked);
+
    /**
-    * @deprecated Replaced by {@link #updateFile(IFile, String, boolean, String, boolean)}
+    * @deprecated Replaced by {@link #updateFile(IFile, String, boolean, String, String, boolean)}
     */
    IFile updateFile(IFile file, String contentFileId, boolean version,
          boolean keepLocked);
-
+   /**
+    * @deprecated Replaced by {@link #updateFile(IFile, String, boolean, String, String, boolean)}
+    */
    IFile updateFile(IFile file, String contentFileId, boolean version, String versionLabel,
+         boolean keepLocked);
+
+   IFile updateFile(IFile file, String contentFileId, boolean version, String versionComment, String versionLabel,
          boolean keepLocked);
 
    IFile moveFile(String sourceFileId, String destinationFilePath, Map<? extends String, ? extends Serializable> properties);

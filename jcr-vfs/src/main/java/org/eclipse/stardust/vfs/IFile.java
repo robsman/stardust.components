@@ -29,6 +29,8 @@ public interface IFile extends IResource, IFileInfo
 
    String getRevisionName();
 
+   String getRevisionComment();
+
    List<String> getVersionLabels();
 
    long getSize();

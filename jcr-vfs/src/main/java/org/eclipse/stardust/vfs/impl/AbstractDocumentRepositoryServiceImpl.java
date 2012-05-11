@@ -234,7 +234,7 @@ public abstract class AbstractDocumentRepositoryServiceImpl implements IDocument
 
    public IFile versionizeFile(String fileId)
    {
-      return createFileVersion(fileId, null, false);
+      return createFileVersion(fileId, null, null, false);
    }
 
    public IFile versionizeFile(IFile file)
@@ -244,7 +244,7 @@ public abstract class AbstractDocumentRepositoryServiceImpl implements IDocument
 
    public IFile createFileVersion(IFile file, String versionLabel, boolean moveLabel)
    {
-      return createFileVersion(file.getId(), versionLabel, moveLabel);
+      return createFileVersion(file.getId(), null, versionLabel, moveLabel);
    }
 
    public IFile lockFile(IFile file)
@@ -259,30 +259,40 @@ public abstract class AbstractDocumentRepositoryServiceImpl implements IDocument
 
    public IFile updateFile(IFile file, boolean version, boolean keepLocked)
    {
-      return updateFile(file, version, null, keepLocked);
+      return updateFile(file, version, null, null, keepLocked);
    }
 
    public IFile updateFile(IFile file, boolean version, String versionLabel, boolean keepLocked)
    {
-      return updateFile(file, (InputStream) null, null, version, versionLabel, keepLocked);
+      return updateFile(file, version, null, versionLabel, keepLocked);
+   }
+
+   public IFile updateFile(IFile file, boolean version, String versionComment, String versionLabel, boolean keepLocked)
+   {
+      return updateFile(file, (InputStream) null, null, version, versionComment, versionLabel, keepLocked);
    }
 
    public IFile updateFile(IFile file, byte[] content, String encoding,
          boolean version, boolean keepLocked)
    {
-      return updateFile(file, content, encoding, version, null, keepLocked);
+      return updateFile(file, content, encoding, version, null, null, keepLocked);
    }
 
    public IFile updateFile(IFile file, byte[] content, String encoding,
          boolean version, String versionLabel, boolean keepLocked)
    {
-      final ByteArrayInputStream bais = (null != content)
-            ? new ByteArrayInputStream(content)
-            : null;
+      return updateFile(file, content, encoding, version, null, versionLabel, keepLocked);
+   }
+
+   public IFile updateFile(IFile file, byte[] content, String encoding, boolean version,
+         String versionComment, String versionLabel, boolean keepLocked)
+   {
+      final ByteArrayInputStream bais = (null != content) ? new ByteArrayInputStream(
+            content) : null;
 
       try
       {
-         return updateFile(file, bais, encoding, version, versionLabel, keepLocked);
+         return updateFile(file, bais, encoding, version, versionComment, versionLabel, keepLocked);
       }
       finally
       {

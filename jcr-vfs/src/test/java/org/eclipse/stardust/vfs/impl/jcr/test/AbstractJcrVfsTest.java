@@ -26,6 +26,7 @@ import java.util.*;
 import javax.jcr.RepositoryException;
 
 import org.eclipse.stardust.vfs.*;
+import org.eclipse.stardust.vfs.impl.FileInfo;
 import org.eclipse.stardust.vfs.impl.jcr.JcrVfsPrincipal;
 import org.eclipse.stardust.vfs.impl.utils.CollectionUtils;
 import org.junit.Test;
@@ -991,31 +992,35 @@ public abstract class AbstractJcrVfsTest
 
       fHasev0.setProperty("meta-data", "some value");
 
-      IFile fHasev1 = jcrVfsWithAllPrivileges.updateFile(fHasev0, true, false);
+      IFile fHasev1 = jcrVfsWithAllPrivileges.updateFile(fHasev0, true, "versionComment v1", null, false);
 
       IFile fHasev2 = jcrVfsWithAllPrivileges.getFile("/nase/hase.txt");
 
       assertNotNull(fHasev2);
 
       assertEquals("some value", fHasev2.getProperty("meta-data"));
+      assertEquals("versionComment v1", fHasev2.getRevisionComment());
 
       fHasev2.setProperty("meta-data", null);
 
-      fHasev2 = jcrVfsWithAllPrivileges.updateFile(fHasev2, true, false);
+      fHasev2 = jcrVfsWithAllPrivileges.updateFile(fHasev2, true, "versionComment v2", null, false);
 
       IFile fHasev3 = jcrVfsWithAllPrivileges.getFile("/nase/hase.txt");
 
       assertNotNull(fHasev3);
 
       assertNull(fHasev3.getProperty("meta-data"));
+      assertEquals("versionComment v2", fHasev3.getRevisionComment());
 
       IFile v1Copy = jcrVfsWithAllPrivileges.getFile(fHasev1.getRevisionId());
       assertNotNull(v1Copy);
       assertEquals("some value", v1Copy.getProperty("meta-data"));
+      assertEquals("versionComment v1", v1Copy.getRevisionComment());
 
       IFile v3Copy = jcrVfsWithAllPrivileges.getFile(fHasev2.getRevisionId());
       assertNotNull(v3Copy);
       assertNull(v3Copy.getProperty("meta-data"));
+      assertEquals("versionComment v2", v3Copy.getRevisionComment());
 
       System.out.println("ID (v0): " + fHasev1.getId() + ", v"
             + fHasev0.getRevisionName() + " (" + fHasev0.getRevisionId() + ")");
@@ -1342,6 +1347,18 @@ public abstract class AbstractJcrVfsTest
       assertTrue(Arrays.equals("update1".getBytes(),
             jcrVfsWithAllPrivileges.retrieveFileContent("/nase/copy-of-hase.txt")));
 
+   }
+
+   @Test
+   public void testQueryFileByMetaData()
+   {
+      IFileInfo fileInfo = new FileInfo("testFindFileByMetaData.txt");
+      fileInfo.setProperty("testFindByMetaData", new HashMap());
+
+      jcrVfsWithAllPrivileges.createFile("/", fileInfo, (byte[])null, null);
+
+      List< ? extends IFile> findFiles = jcrVfsWithAllPrivileges.findFiles("/jcr:root//element(*, nt:file)/vfs:metaData/vfs:attributes/vfs:testFindByMetaData");
+      assertEquals(1, findFiles.size());
    }
 
    @Test
