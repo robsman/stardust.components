@@ -162,22 +162,16 @@ public interface IDocumentRepositoryService
    /**
     * @deprecated Replaced by {@link #createFileVersion(String, String, String, boolean)}
     */
-   @Deprecated
-   IFile versionizeFile(String fileId);
-
-   /**
-    * @deprecated Replaced by {@link #createFileVersion(String, String, String, boolean)}
-    */
    IFile createFileVersion(String fileId, String versionLabel, boolean moveLabel);
 
    IFile createFileVersion(String fileId, String versionComment, String versionLabel, boolean moveLabel);
 
    /**
-    * @deprecated Replaced by {@link #createFileVersion(IFile, String, boolean)}
+    * @deprecated Replaced by {@link #createFileVersion(IFile, String, String, boolean)}
     */
-   IFile versionizeFile(IFile file);
-
    IFile createFileVersion(IFile file, String versionLabel, boolean moveLabel);
+
+   IFile createFileVersion(IFile file, String versionComment, String versionLabel, boolean moveLabel);
 
    void removeFileVersion(String fileId, String fileRevisionId);
 

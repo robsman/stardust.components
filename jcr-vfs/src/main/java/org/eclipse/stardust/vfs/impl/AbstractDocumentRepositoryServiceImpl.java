@@ -232,19 +232,14 @@ public abstract class AbstractDocumentRepositoryServiceImpl implements IDocument
       return createFile(folder.getId(), file, content, encoding);
    }
 
-   public IFile versionizeFile(String fileId)
-   {
-      return createFileVersion(fileId, null, null, false);
-   }
-
-   public IFile versionizeFile(IFile file)
-   {
-      return createFileVersion(file, null, false);
-   }
-
    public IFile createFileVersion(IFile file, String versionLabel, boolean moveLabel)
    {
       return createFileVersion(file.getId(), null, versionLabel, moveLabel);
+   }
+
+   public IFile createFileVersion(IFile file, String versionComment, String versionLabel, boolean moveLabel)
+   {
+      return createFileVersion(file.getId(), versionComment, versionLabel, moveLabel);
    }
 
    public IFile lockFile(IFile file)

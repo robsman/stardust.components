@@ -478,11 +478,11 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
    public IFile createFileVersion(final String fileId, final String versionLabel,
          final boolean moveLabel)
    {
-      return createFileVersion(fileId, versionLabel, null, moveLabel);
+      return createFileVersion(fileId, null, versionLabel, moveLabel);
    }
 
-   public IFile createFileVersion(final String fileId, final String versionLabel,
-         final String versionComment, final boolean moveLabel)
+   public IFile createFileVersion(final String fileId, final String versionComment,
+         final String versionLabel, final boolean moveLabel)
    {
       return doWithJcrVfs(new JcrVfsFunction<IFile>()
       {
