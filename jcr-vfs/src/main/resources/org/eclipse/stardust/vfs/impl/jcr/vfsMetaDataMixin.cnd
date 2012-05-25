@@ -1,0 +1,7 @@
+/*  jcr-vfs schema extension to support local metaData nodes */
+
+// The namespace declaration
+<vfs = 'http://www.sungard.com/infinity/vfs/1.0'>
+
+[vfs:vfsMetaData] mixin
+	+ vfs:metaData (nt:unstructured) = nt:unstructured mandatory autocreated

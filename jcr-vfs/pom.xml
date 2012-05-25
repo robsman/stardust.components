@@ -1,0 +1,300 @@
+<!--
+    Copyright (c) 2012 SunGard CSA LLC and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+       SunGard CSA LLC - initial API and implementation and/or initial documentation
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>com.sungard.infinity.bpm</groupId>
+   <artifactId>jcr-vfs</artifactId>
+   <packaging>jar</packaging>
+   <version>2.4.0-SNAPSHOT</version>
+
+   <name>jcr-vfs</name>
+   <url>https://portal.sungard.com/wiki/display/csa/Stargate</url>
+   <description>A filesystem API on top of JCR.</description>
+
+   <issueManagement>
+      <system>JIRA</system>
+      <url>https://www.csa.sungard.com/jira/browse/CRNT</url>
+   </issueManagement>
+
+   <pluginRepositories>
+      <pluginRepository>
+         <id>central-plugin</id>
+         <name>Central PlugIn Repository</name>
+         <url>http://repo1.maven.org/maven2</url>
+      </pluginRepository>
+   </pluginRepositories>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      
+      <spring.version>3.0.5.RELEASE</spring.version>
+   </properties>
+
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <groupId>org.apache.geronimo.components</groupId>
+            <artifactId>geronimo-connector</artifactId>
+            <version>2.2.1</version>
+         </dependency>
+         <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
+            <version>2.0.0</version>
+         </dependency>
+         <dependency>
+            <groupId>org.apache.geronimo.components</groupId>
+            <artifactId>geronimo-transaction</artifactId>
+            <version>2.2.1</version>
+         </dependency>
+         <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.3</version>
+         </dependency>
+         <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+         </dependency>
+         <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2</version>
+         </dependency>
+      </dependencies>
+   </dependencyManagement>
+
+   <dependencies>
+      <!-- *********** -->
+      <!--  mandatory  -->
+      <!-- *********** -->
+      <dependency>
+         <groupId>javax.jcr</groupId>
+         <artifactId>jcr</artifactId>
+         <version>2.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-beans</artifactId>
+         <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-core</artifactId>
+         <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-tx</artifactId>
+         <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>servlet-api</artifactId>
+         <version>2.4</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>commons-fileupload</groupId>
+         <artifactId>commons-fileupload</artifactId>
+         <version>1.2.1</version>
+      </dependency>
+      <dependency>
+         <groupId>commons-httpclient</groupId>
+         <artifactId>commons-httpclient</artifactId>
+         <version>3.0</version>
+         <exclusions>
+            <exclusion>
+               <artifactId>junit</artifactId>
+               <groupId>junit</groupId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+
+      <!-- ************************************* -->
+      <!--  optional - JCR Provider: Jackrabbit  -->
+      <!-- ************************************* -->
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-api</artifactId>
+         <version>2.2.5</version>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-core</artifactId>
+         <version>2.2.5</version>
+         <optional>true</optional>
+         <exclusions>
+            <exclusion>
+               <groupId>org.bouncycastle</groupId>
+               <artifactId>bcmail-jdk15</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.bouncycastle</groupId>
+               <artifactId>bcprov-jdk15</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>edu.ucar</groupId>
+               <artifactId>netcdf</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>concurrent</groupId>
+               <artifactId>concurrent</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.derby</groupId>
+               <artifactId>derby</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.pdfbox</groupId>
+               <artifactId>pdfbox</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-jca</artifactId>
+         <version>2.2.5</version>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-jcr-commons</artifactId>
+         <version>2.2.5</version>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-spi-commons</artifactId>
+         <version>2.2.5</version>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.geronimo.specs</groupId>
+         <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
+         <optional>true</optional>
+      </dependency>
+
+      <!-- ***************************************** -->
+      <!--  test (to be refactored with CRNT-24151)  -->
+      <!-- ***************************************** -->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.10</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-test</artifactId>
+         <version>${spring.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-jcr-rmi</artifactId>
+         <version>2.2.5</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-jms</artifactId>
+         <version>${spring.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+      	<groupId>org.apache.jackrabbit</groupId>
+      	<artifactId>jackrabbit-webapp</artifactId>
+      	<version>2.2.5</version>
+      	<type>jar</type>
+      	<scope>test</scope>
+      	<exclusions>
+      		<exclusion>
+      			<artifactId>log4j-over-slf4j</artifactId>
+      			<groupId>org.slf4j</groupId>
+      		</exclusion>
+      	</exclusions>
+      </dependency>
+      <dependency>
+      	<groupId>org.apache.jackrabbit</groupId>
+      	<artifactId>jackrabbit-webdav</artifactId>
+      	<version>2.2.5</version>
+      	<type>jar</type>
+      	<scope>test</scope>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.0.2</version>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.10</version>
+            <configuration>
+               <skip>true</skip>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+
+   <profiles>
+      <profile>
+         <id>with-sources</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-source-plugin</artifactId>
+                  <executions>
+                     <execution>
+                        <phase>package</phase>
+                        <goals>
+                           <goal>jar</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+   </profiles>
+
+   <distributionManagement>
+      <repository>
+         <id>ipp-releases</id>
+         <name>IPP Releases</name>
+         <url>https://infinity.sungard.com/repository/ipp-releases</url>
+         <layout>default</layout>
+         <uniqueVersion>false</uniqueVersion>
+      </repository>
+      <snapshotRepository>
+         <id>ipp-snapshots</id>
+         <name>IPP Snapshots</name>
+         <url>https://infinity.sungard.com/repository/ipp-snapshots</url>
+         <layout>default</layout>
+         <uniqueVersion>false</uniqueVersion>
+      </snapshotRepository>
+   </distributionManagement>
+
+</project>
