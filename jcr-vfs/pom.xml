@@ -278,6 +278,22 @@
             </plugins>
          </build>
       </profile>
+      <profile>
+         <id>ipp-build</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+         </activation>
+         <repositories>
+            <repository>
+               <id>stardust-3rdparty-repo</id>
+               <url>https://infinity.sungard.com/repository/ipp-3rd-party</url>
+               <layout>default</layout>
+               <snapshots>
+                  <enabled>false</enabled>
+               </snapshots>
+            </repository>
+         </repositories>
+      </profile>
    </profiles>
 
    <distributionManagement>
