@@ -1339,13 +1339,7 @@ public class JcrVfsOperations
       session.save();
 
       // Workaround for NPE on 2nd versioning
-      VersionHistory versionHistory = nFile.getVersionHistory();
-      if (versionHistory != null)
-      {
-         ItemId versionHistoryId = ((org.apache.jackrabbit.core.version.VersionHistoryImpl) versionHistory).getId();
-         // remove from item manager cache
-         getItemManager(session).itemDestroyed(versionHistoryId, null);
-      }
+      clearJackrabbitItemManagerCacheEntry(nFile);
 
       VersionManager versionManager = session.getWorkspace().getVersionManager();
       Version version = versionManager.checkin(nFile.getPath());
@@ -1412,6 +1406,18 @@ public class JcrVfsOperations
          VersionHistory metaDataHistory = JcrNode.getVersionHistory(nMetaData);
          JcrVersionHistory.addVersionLabel(metaDataHistory,
                JcrItem.getName(frozenMetaData), getRevisionId(version), false);
+      }
+   }
+
+   private void clearJackrabbitItemManagerCacheEntry(Node nFile)
+         throws UnsupportedRepositoryOperationException, RepositoryException
+   {
+      VersionHistory versionHistory = nFile.getVersionHistory();
+      if (versionHistory != null)
+      {
+         ItemId versionHistoryId = ((org.apache.jackrabbit.core.version.VersionHistoryImpl) versionHistory).getId();
+         // remove from item manager cache
+         getItemManager(session).itemDestroyed(versionHistoryId, null);
       }
    }
 
@@ -2618,15 +2624,21 @@ public class JcrVfsOperations
             {
                JcrNode.restore(nFile, pred, true);
                JcrNode.checkin(nFile);
+               try
+               {
+                  fileHistory.removeVersion(version.getName());
+               }
+               catch (javax.jcr.ReferentialIntegrityException e)
+               {
+                  throw new RepositoryOperationFailedException(
+                        "Cannot delete root version.", e);
+               }
             }
-            try
+            else
             {
-               fileHistory.removeVersion(version.getName());
-            }
-            catch (javax.jcr.ReferentialIntegrityException e)
-            {
+               // Removal of last version would lead to dangling reference.
                throw new RepositoryOperationFailedException(
-                     "Cannot delete root version.", e);
+                     "Cannot delete root version.", new ReferentialIntegrityException());
             }
             break;
          }
