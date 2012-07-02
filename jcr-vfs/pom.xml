@@ -15,7 +15,7 @@
    <groupId>com.sungard.infinity.bpm</groupId>
    <artifactId>jcr-vfs</artifactId>
    <packaging>jar</packaging>
-   <version>2.4.0</version>
+   <version>2.4.1-SNAPSHOT</version>
 
    <name>jcr-vfs</name>
    <url>https://portal.sungard.com/wiki/display/csa/Stargate</url>
@@ -38,6 +38,9 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
       <spring.version>3.0.5.RELEASE</spring.version>
+      
+      <distrib.repo.releases.url>https://infinity.sungard.com/repository/ipp-releases</distrib.repo.releases.url>
+      <distrib.repo.snapshots.url>https://infinity.sungard.com/repository/ipp-snapshots</distrib.repo.snapshots.url>
    </properties>
 
    <dependencyManagement>
@@ -300,14 +303,14 @@
       <repository>
          <id>ipp-releases</id>
          <name>IPP Releases</name>
-         <url>https://infinity.sungard.com/repository/ipp-releases</url>
+         <url>${distrib.repo.releases.url}</url>
          <layout>default</layout>
          <uniqueVersion>false</uniqueVersion>
       </repository>
       <snapshotRepository>
          <id>ipp-snapshots</id>
          <name>IPP Snapshots</name>
-         <url>https://infinity.sungard.com/repository/ipp-snapshots</url>
+         <url>${distrib.repo.snapshots.url}</url>
          <layout>default</layout>
          <uniqueVersion>false</uniqueVersion>
       </snapshotRepository>
