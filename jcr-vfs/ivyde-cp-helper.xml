@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2012 SunGard CSA LLC and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+       SunGard CSA LLC - initial API and implementation and/or initial documentation
+ -->
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:m="http://ant.apache.org/ivy/maven"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+   <info organisation="com.sungard.infinity.bpm" module="jcr-vfs" revision="2.4.0">
+      <license name="Eclipse Public License (EPL) - v1.0" url="http://www.eclipse.org/legal/epl-v10.html" />
+   </info>
+   
+   <configurations>
+      <conf name="compile" visibility="private" description="Compile Configuration" />
+   </configurations>
+   
+   <dependencies>
+      <!--  ivyDE plugin is using the type which is defined in the remote POM. Therefore it
+            downloads a rar file instead of jar -->
+      <dependency org="org.apache.jackrabbit" name="jackrabbit-jca" rev="2.2.5" transitive="false">
+         <artifact name="jackrabbit-jca" type="jar" />
+      </dependency>
+   </dependencies>
+</ivy-module>
