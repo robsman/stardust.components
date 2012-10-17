@@ -177,6 +177,10 @@
                <groupId>org.apache.pdfbox</groupId>
                <artifactId>pdfbox</artifactId>
             </exclusion>
+            <exclusion>
+               <groupId>com.drewnoakes</groupId>
+               <artifactId>metadata-extractor</artifactId>            
+            </exclusion>
          </exclusions>
       </dependency>
       <dependency>
