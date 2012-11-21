@@ -314,12 +314,12 @@
          <distributionManagement>
             <repository>
                <id>stardust-releases</id>
-               <url>${stardust.releases.repo}</url>
+               <url>${stardust.maven.releases.repo}</url>
                <uniqueVersion>false</uniqueVersion>
             </repository>
             <snapshotRepository>
                <id>stardust-snapshots</id>
-               <url>${stardust.snapshots.repo}</url>
+               <url>${stardust.maven.snapshots.repo}</url>
                <uniqueVersion>false</uniqueVersion>
             </snapshotRepository>
          </distributionManagement>
