@@ -37,7 +37,30 @@
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-      <spring.version>3.0.5.RELEASE</spring.version>
+      <geronimo-connector.version>2.2.1</geronimo-connector.version>
+      <geronimo-j2ee-connector_1.5_spec.version>2.0.0</geronimo-j2ee-connector_1.5_spec.version>
+      <geronimo-transaction.version>2.2.1</geronimo-transaction.version>
+      <commons-codec.version>1.3</commons-codec.version>
+      <commons-logging.version>1.1.1</commons-logging.version>
+      <commons-collections.version>3.2</commons-collections.version>
+      <jackrabbit-core.version>2.2.5-infinity01</jackrabbit-core.version>
+      <jackrabbit-jca.version>2.2.5</jackrabbit-jca.version>
+      <junit.version>4.10</junit.version>
+      <jcr.version>2.0</jcr.version>
+      <spring-beans.version>3.0.5.RELEASE</spring-beans.version>
+      <spring-core.version>3.0.5.RELEASE</spring-core.version>
+      <spring-tx.version>3.0.5.RELEASE</spring-tx.version>
+      <servlet-api.version>2.4</servlet-api.version>
+      <commons-fileupload.version>1.2.1</commons-fileupload.version>
+      <commons-httpclient.version>3.0</commons-httpclient.version>
+      <jackrabbit-api.version>2.2.5</jackrabbit-api.version>
+      <jackrabbit-jcr-commons.version>2.2.5</jackrabbit-jcr-commons.version>
+      <jackrabbit-spi-commons.version>2.2.5</jackrabbit-spi-commons.version>
+      <spring-test.version>3.0.5.RELEASE</spring-test.version>
+      <jackrabbit-jcr-rmi.version>2.2.5</jackrabbit-jcr-rmi.version>
+      <spring-jms.version>3.0.5.RELEASE</spring-jms.version>
+      <jackrabbit-webapp.version>2.2.5</jackrabbit-webapp.version>
+      <jackrabbit-webdav.version>2.2.5</jackrabbit-webdav.version>
    </properties>
 
    <dependencyManagement>
@@ -45,48 +68,48 @@
          <dependency>
             <groupId>org.apache.geronimo.components</groupId>
             <artifactId>geronimo-connector</artifactId>
-            <version>2.2.1</version>
+            <version>${geronimo-connector.version}</version>
          </dependency>
          <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
-            <version>2.0.0</version>
+            <version>${geronimo-j2ee-connector_1.5_spec.version}</version>
          </dependency>
          <dependency>
             <groupId>org.apache.geronimo.components</groupId>
             <artifactId>geronimo-transaction</artifactId>
-            <version>2.2.1</version>
+            <version>${geronimo-transaction.version}</version>
          </dependency>
          <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.3</version>
+            <version>${commons-codec.version}</version>
          </dependency>
          <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
+            <version>${commons-logging.version}</version>
          </dependency>
          <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.2</version>
+            <version>${commons-collections.version}</version>
          </dependency>
          <dependency>
             <groupId>org.apache.jackrabbit</groupId>
             <artifactId>jackrabbit-core</artifactId>
-            <version>2.2.5-infinity01</version>
+            <version>${jackrabbit-core.version}</version>
          </dependency>
          <dependency>
             <groupId>org.apache.jackrabbit</groupId>
             <artifactId>jackrabbit-jca</artifactId>
-            <version>2.2.5</version>
+            <version>${jackrabbit-jca.version}</version>
             <type>jar</type>
          </dependency>
          <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>${junit.version}</version>
          </dependency>
       </dependencies>
    </dependencyManagement>
@@ -98,38 +121,38 @@
       <dependency>
          <groupId>javax.jcr</groupId>
          <artifactId>jcr</artifactId>
-         <version>2.0</version>
+         <version>${jcr.version}</version>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-beans</artifactId>
-         <version>${spring.version}</version>
+         <version>${spring-beans.version}</version>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-core</artifactId>
-         <version>${spring.version}</version>
+         <version>${spring-core.version}</version>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-tx</artifactId>
-         <version>${spring.version}</version>
+         <version>${spring-tx.version}</version>
       </dependency>
       <dependency>
          <groupId>javax.servlet</groupId>
          <artifactId>servlet-api</artifactId>
-         <version>2.4</version>
+         <version>${servlet-api.version}</version>
          <scope>provided</scope>
       </dependency>
       <dependency>
          <groupId>commons-fileupload</groupId>
          <artifactId>commons-fileupload</artifactId>
-         <version>1.2.1</version>
+         <version>${commons-fileupload.version}</version>
       </dependency>
       <dependency>
          <groupId>commons-httpclient</groupId>
          <artifactId>commons-httpclient</artifactId>
-         <version>3.0</version>
+         <version>${commons-httpclient.version}</version>
          <exclusions>
             <exclusion>
                <artifactId>junit</artifactId>
@@ -144,7 +167,7 @@
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-api</artifactId>
-         <version>2.2.5</version>
+         <version>${jackrabbit-api.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
@@ -191,13 +214,13 @@
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-jcr-commons</artifactId>
-         <version>2.2.5</version>
+         <version>${jackrabbit-jcr-commons.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-spi-commons</artifactId>
-         <version>2.2.5</version>
+         <version>${jackrabbit-spi-commons.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
@@ -217,25 +240,25 @@
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-test</artifactId>
-         <version>${spring.version}</version>
+         <version>${spring-test.version}</version>
          <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-jcr-rmi</artifactId>
-         <version>2.2.5</version>
+         <version>${jackrabbit-jcr-rmi.version}</version>
          <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-jms</artifactId>
-         <version>${spring.version}</version>
+         <version>${spring-jms.version}</version>
          <scope>test</scope>
       </dependency>
       <dependency>
       	<groupId>org.apache.jackrabbit</groupId>
       	<artifactId>jackrabbit-webapp</artifactId>
-      	<version>2.2.5</version>
+      	<version>${jackrabbit-webapp.version}</version>
       	<type>jar</type>
       	<scope>test</scope>
       	<exclusions>
@@ -248,7 +271,7 @@
       <dependency>
       	<groupId>org.apache.jackrabbit</groupId>
       	<artifactId>jackrabbit-webdav</artifactId>
-      	<version>2.2.5</version>
+      	<version>${jackrabbit-webdav.version}</version>
       	<type>jar</type>
       	<scope>test</scope>
       </dependency>
@@ -297,7 +320,7 @@
          </build>
       </profile>
       <profile>
-         <id>ipp-build</id>
+         <id>stardust-build</id>
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
