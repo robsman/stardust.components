@@ -25,7 +25,7 @@
    <dependencies>
       <!--  ivyDE plugin is using the type which is defined in the remote POM. Therefore it
             downloads a rar file instead of jar -->
-      <dependency org="org.apache.jackrabbit" name="jackrabbit-jca" rev="2.2.5" transitive="false">
+      <dependency org="org.apache.jackrabbit" name="jackrabbit-jca" rev="${jackrabbit-jca.version}" transitive="false">
          <artifact name="jackrabbit-jca" type="jar" />
       </dependency>
    </dependencies>
