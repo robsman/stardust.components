@@ -16,6 +16,7 @@
 
   <modules>
     <module>jcr-vfs</module>
+    <module>toc-generator</module>
   </modules>
 
 </project>
