@@ -12,6 +12,13 @@
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
 
+   <parent>
+      <groupId>org.eclipse.stardust</groupId>
+      <artifactId>product-parent</artifactId>
+      <version>9.9.9-SNAPSHOT</version>
+      <relativePath>../../product/product-parent/pom.xml</relativePath>
+   </parent>
+
    <groupId>org.eclipse.stardust.components</groupId>
    <artifactId>jcr-vfs</artifactId>
    <packaging>jar</packaging>
@@ -203,6 +210,10 @@
                <groupId>com.drewnoakes</groupId>
                <artifactId>metadata-extractor</artifactId>
             </exclusion>
+            <exclusion>
+               <groupId>org.apache.geronimo.specs</groupId>
+               <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+            </exclusion>
          </exclusions>
       </dependency>
       <dependency>
@@ -324,16 +335,6 @@
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
-         <repositories>
-            <repository>
-               <id>stardust-3rdparty-repo</id>
-               <url>http://archive.eclipse.org/stardust/maven/3rdparty/eclipse</url>
-               <layout>default</layout>
-               <snapshots>
-                  <enabled>false</enabled>
-               </snapshots>
-            </repository>
-         </repositories>
          <distributionManagement>
             <repository>
                <id>stardust-releases</id>
