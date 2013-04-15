@@ -14,7 +14,6 @@ package org.eclipse.stardust.documentation;
 import com.sun.javadoc.*;
 
 import java.io.*;
-import java.util.*;
 
 /**
  * Doclet to create Eclipse toc for JavaDoc.
@@ -36,7 +35,6 @@ public class CustomJavaDocToc extends Doclet
 		String filename;
 		String packagename = null;
 		String packageref = null;
-		String qualiPath = null;
 		ClassDoc[] pclasses = null;
 		ClassDoc[] classes = root.specifiedClasses();
 		readOptions(root.options());
@@ -77,28 +75,6 @@ public class CustomJavaDocToc extends Doclet
 		}
 
 		return true;
-	}
-
-	/**
-	 * Reads the source path of JavaDoc classes from option -sourcepath.
-	 * Returns null if no sourcepath is given.
-	 *  
-	 */
-	private static String readPath(String[][] options)
-	{
-
-		for (int i = 0; i < options.length; i++)
-		{
-			String[] opt = options[i];
-			if (opt.length > 1)
-			{
-				if (opt[0].equals("-sourcepath"))
-				{
-					return opt[1];
-				} 
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -152,12 +128,19 @@ public class CustomJavaDocToc extends Doclet
 			tocname = "tocswing";
 			label = "@productnameonly@ Swing Portal API";
 			docref = "html/handbooks/reference/api/tds/";
-		} else
+		} 
+      else if (scope.equals("engine"))
 		{
 			tocname = "tocapi";
 			label = "@productnameonly@ Engine API";
 			docref = "html/handbooks/reference/api/engine/";
 		}
+      else
+      {
+			tocname = "toc" + scope;
+			label = "@productnameonly@ " + Character.toUpperCase(scope.charAt(0)) + scope.substring(1) + " API";
+			docref = "html/handbooks/reference/api/" + scope + "/";
+      }
 	}
 	
 	/**
