@@ -30,32 +30,9 @@ class ThreadDumpGeneratorImpl_15 extends ThreadDumpGenerator {
     }
 
     /**
-     * copied from JDK 1.6 {@link ThreadInfo} toString()
+     * modified due to <a href="https://dev.eclipse.org/ipzilla/show_bug.cgi?id=6911">CQ #6911</a>
      */
     protected void appendThreadInfo(ThreadInfo info, StringBuilder sb) {
-        sb.append("\"").append(info.getThreadName()).append("\"")
-                .append(" Id=").append(info.getThreadId()).append(" ").append(info.getThreadState());
-        if (info.getLockName() != null) {
-            sb.append(" on ").append(info.getLockName());
-        }
-        if (info.getLockOwnerName() != null) {
-            sb.append(" owned by \"")
-                    .append(info.getLockOwnerName())
-                    .append("\" Id=").append(info.getLockOwnerId());
-        }
-        if (info.isSuspended()) {
-            sb.append(" (suspended)");
-        }
-        if (info.isInNative()) {
-            sb.append(" (in native)");
-        }
-        sb.append('\n');
-        StackTraceElement[] stackTrace = info.getStackTrace();
-        for (int i = 0; i < stackTrace.length; i++) {
-            StackTraceElement ste = stackTrace[i];
-            sb.append("\tat ").append(ste.toString());
-            sb.append('\n');
-        }
-        sb.append('\n');
+       sb.append(info.toString());
     }
 }

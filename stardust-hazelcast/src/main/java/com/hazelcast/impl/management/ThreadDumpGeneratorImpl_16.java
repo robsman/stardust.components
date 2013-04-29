@@ -34,10 +34,6 @@ class ThreadDumpGeneratorImpl_16 extends ThreadDumpGenerator {
     private static final String ThreadMXBean_dumpAllThreads = "dumpAllThreads";
     private static final String ThreadMXBean_getThreadInfo = "getThreadInfo";
     private static final String ThreadMXBean_findDeadlockedThreads = "findDeadlockedThreads";
-    private static final String ThreadInfo_getLockInfo = "getLockInfo";
-    private static final String ThreadInfo_getLockedSynchronizers = "getLockedSynchronizers";
-    private static final String ThreadInfo_getLockedMonitors = "getLockedMonitors";
-    private static final String MonitorInfo_getLockedStackDepth = "getLockedStackDepth";
 
     private final static ConcurrentMap<String, Method> methods = new ConcurrentHashMap<String, Method>();
 
@@ -69,69 +65,10 @@ class ThreadDumpGeneratorImpl_16 extends ThreadDumpGenerator {
     }
 
     /**
-     * copied from JDK 1.6 {@link ThreadInfo} toString()
+     * modified due to <a href="https://dev.eclipse.org/ipzilla/show_bug.cgi?id=6911">CQ #6911</a>
      */
     protected void appendThreadInfo(ThreadInfo info, StringBuilder sb) {
-        sb.append("\"").append(info.getThreadName()).append("\"").append(
-                " Id=").append(info.getThreadId()).append(" ").append(
-                info.getThreadState());
-        if (info.getLockName() != null) {
-            sb.append(" on ").append(info.getLockName());
-        }
-        if (info.getLockOwnerName() != null) {
-            sb.append(" owned by \"").append(info.getLockOwnerName()).
-                    append("\" Id=").append(+info.getLockOwnerId());
-        }
-        if (info.isSuspended()) {
-            sb.append(" (suspended)");
-        }
-        if (info.isInNative()) {
-            sb.append(" (in native)");
-        }
-        sb.append('\n');
-        final StackTraceElement[] stackTrace = info.getStackTrace();
-        final Object lockInfo = objectCall(info, ThreadInfo_getLockInfo);
-        final Object[] monitorInfo = objectCall(info, ThreadInfo_getLockedMonitors);
-        for (int i = 0; i < stackTrace.length; i++) {
-            StackTraceElement ste = stackTrace[i];
-            sb.append("\tat ").append(ste.toString());
-            sb.append('\n');
-            if (i == 0 && lockInfo != null) {
-                Thread.State ts = info.getThreadState();
-                switch (ts) {
-                    case BLOCKED:
-                        sb.append("\t-  blocked on ").append(lockInfo);
-                        sb.append('\n');
-                        break;
-                    case WAITING:
-                        sb.append("\t-  waiting on ").append(lockInfo);
-                        sb.append('\n');
-                        break;
-                    case TIMED_WAITING:
-                        sb.append("\t-  waiting on ").append(lockInfo);
-                        sb.append('\n');
-                        break;
-                    default:
-                }
-            }
-            for (Object mi : monitorInfo) {
-                Integer depth = objectCall(mi, MonitorInfo_getLockedStackDepth);
-                if (depth == i) {
-                    sb.append("\t-  locked ").append(mi);
-                    sb.append('\n');
-                }
-            }
-        }
-        final Object[] locks = objectCall(info, ThreadInfo_getLockedSynchronizers);
-        if (locks.length > 0) {
-            sb.append("\n\tNumber of locked synchronizers = ").append(locks.length);
-            sb.append('\n');
-            for (Object li : locks) {
-                sb.append("\t- ").append(li);
-                sb.append('\n');
-            }
-        }
-        sb.append('\n');
+       sb.append(info.toString());
     }
 
     private static boolean booleanCall(Object object, String methodName) {
