@@ -1059,22 +1059,6 @@ public class ConcurrentMapManager extends BaseManager {
                 if (txn.has(name, key)) {
                     Data value = txn.get(name, key);
                     return tc.isClient() ? value : toObject(value);
-                } else {
-                    MLock mlock = new MLock();
-                    boolean locked = mlock
-                            .lockAndGetValue(name, key, DEFAULT_TXN_TIMEOUT);
-                    if (!locked) {
-                        throwTxTimeoutException(key);
-                    }
-                    Object oldObject = null;
-                    Data oldValue = mlock.oldValue;
-                    if (oldValue != null) {
-                        oldObject = tc.isClient() ? oldValue : tc.toObject(oldValue);
-                        txn.attachPutOp(name, key, oldValue, false);
-                    } else {
-                        txn.attachPutOp(name, key, null, false);
-                    }
-                    return oldObject;
                 }
             }
             final CMap cMap = maps.get(name);
