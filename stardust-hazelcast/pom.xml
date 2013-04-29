@@ -6,15 +6,16 @@
         <groupId>com.hazelcast</groupId>
         <artifactId>hazelcast-root</artifactId>
         <version>2.4</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <name>hazelcast</name>
     <artifactId>hazelcast</artifactId>
+    <version>2.4-stardust01</version>
     <packaging>jar</packaging>
 
     <properties>
-        <log4j.version>1.2.12</log4j.version>
+        <log4j.version>1.2.15</log4j.version>
+        <slf4j.api.version>1.5.6</slf4j.api.version>
     </properties>
 
     <build>
