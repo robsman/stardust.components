@@ -15,7 +15,7 @@
    <packaging>pom</packaging>
    
    <properties>
-      <hazelcast.version>1.9</hazelcast.version>
+      <hazelcast.version>2.4</hazelcast.version>
    </properties>
 
    <modules>

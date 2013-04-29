@@ -1,4 +1,4 @@
-package com.infinity.bpm.rt.integration.cache.hazelcast.jca;
+package org.eclipse.stardust.jca.hazelcast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +11,19 @@ import javax.resource.spi.ConnectionEvent;
 import javax.resource.spi.ConnectionEventListener;
 import javax.resource.spi.ConnectionRequestInfo;
 
+import org.eclipse.stardust.jca.hazelcast.StardustManagedConnectionFactoryImpl.HzConnectionEvent;
+
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.Transaction;
 import com.hazelcast.impl.CallContext;
 import com.hazelcast.impl.ThreadContext;
 import com.hazelcast.jca.ManagedConnectionImpl;
-import com.infinity.bpm.rt.integration.cache.hazelcast.jca.IppManagedConnectionFactoryImpl.HzConnectionEvent;
 
-public class IppManagedConnectionImpl extends ManagedConnectionImpl
+public class StardustManagedConnectionImpl extends ManagedConnectionImpl
 {
    protected static final ConcurrentMap<CallContext, CallContext> predecessors = new ConcurrentHashMap<CallContext, CallContext>();
 
-   protected final IppManagedConnectionFactoryImpl factory;
+   protected final StardustManagedConnectionFactoryImpl factory;
 
    protected List<ConnectionEventListener> lsListeners = null;
 
@@ -36,7 +37,7 @@ public class IppManagedConnectionImpl extends ManagedConnectionImpl
 
    protected String txThreadId;
 
-   public IppManagedConnectionImpl(ConnectionRequestInfo cxRequestInfo, IppManagedConnectionFactoryImpl factory)
+   public StardustManagedConnectionImpl(ConnectionRequestInfo cxRequestInfo, StardustManagedConnectionFactoryImpl factory)
    {
       super();
 

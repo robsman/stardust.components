@@ -1,4 +1,4 @@
-package com.infinity.bpm.rt.integration.cache.hazelcast.jca;
+package org.eclipse.stardust.jca.hazelcast;
 
 import static java.util.Collections.emptySet;
 
@@ -14,7 +14,7 @@ import javax.security.auth.Subject;
 
 import com.hazelcast.jca.ManagedConnectionFactoryImpl;
 
-public class IppManagedConnectionFactoryImpl extends ManagedConnectionFactoryImpl
+public class StardustManagedConnectionFactoryImpl extends ManagedConnectionFactoryImpl
 {
    private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class IppManagedConnectionFactoryImpl extends ManagedConnectionFactoryImp
     */
    protected boolean deliverClosed = true;
 
-   public IppManagedConnectionFactoryImpl()
+   public StardustManagedConnectionFactoryImpl()
    {
       String tracingSpec = System.getProperty(PRP_CONNECTION_TRACING_EVENTS, "");
       if ((null != tracingSpec) && (0 < tracingSpec.length()))
@@ -90,7 +90,7 @@ public class IppManagedConnectionFactoryImpl extends ManagedConnectionFactoryImp
    {
       log(this, "createManagedConnection (IPP)");
 
-      return new IppManagedConnectionImpl(cxRequestInfo, this);
+      return new StardustManagedConnectionImpl(cxRequestInfo, this);
    }
 
    @Override
@@ -104,9 +104,9 @@ public class IppManagedConnectionFactoryImpl extends ManagedConnectionFactoryImp
       {
          for (ManagedConnection conn : (Set<ManagedConnection>) connectionSet)
          {
-            if (conn instanceof IppManagedConnectionImpl)
+            if (conn instanceof StardustManagedConnectionImpl)
             {
-               ConnectionRequestInfo otherCxRequestInfo = ((IppManagedConnectionImpl) conn).getCxRequestInfo();
+               ConnectionRequestInfo otherCxRequestInfo = ((StardustManagedConnectionImpl) conn).getCxRequestInfo();
                if (((null == otherCxRequestInfo) && (null == cxRequestInfo))
                      || otherCxRequestInfo.equals(cxRequestInfo))
                {

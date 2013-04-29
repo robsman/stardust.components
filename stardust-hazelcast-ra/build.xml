@@ -25,7 +25,7 @@
    <property file="${project.etc}/private.properties" />
 
    <property name="artifactId" value="hazelcast-ra" />
-   <property name="hazelcast.version" value="1.9-stardust02" />
+   <property name="hazelcast.version" value="2.4-stardust01" />
    
    <import file="${project.dir}/../../build.tools/commons-build.xml" />
 

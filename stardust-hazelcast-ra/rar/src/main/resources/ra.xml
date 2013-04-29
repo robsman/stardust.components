@@ -6,10 +6,9 @@
            version="1.5">
     <description>Hazelcast Resource Adapter</description>
     <display-name>HazelcastRA</display-name>
-    <icon></icon>
     <vendor-name>Hazelcast.com</vendor-name>
     <eis-type>Hazelcast</eis-type>
-    <resourceadapter-version>1.9</resourceadapter-version>
+    <resourceadapter-version>2.4</resourceadapter-version>
 
     <license>
         <description>Copyright (c) Hazelcast.com</description>
@@ -19,7 +18,7 @@
         <resourceadapter-class>com.hazelcast.jca.ResourceAdapterImpl</resourceadapter-class>
         <outbound-resourceadapter>
             <connection-definition>
-                <managedconnectionfactory-class>com.infinity.bpm.rt.integration.cache.hazelcast.jca.IppManagedConnectionFactoryImpl
+                <managedconnectionfactory-class>org.eclipse.stardust.jca.hazelcast.StardustManagedConnectionFactoryImpl
                 </managedconnectionfactory-class>
 				
 				<!--

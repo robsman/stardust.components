@@ -15,7 +15,7 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
    <info organisation="com.hazelcast" module="hazelcast-ra"
-      revision="1.9-stardust02">
+      revision="2.4-stardust01">
    </info>
 
    <configurations>
