@@ -154,6 +154,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
+                    <skipTests>true</skipTests>
                     <argLine>-Xms512m -Xmx512m -XX:MaxPermSize=128M -Dhazelcast.version.check.enabled=false
                         -Dhazelcast.mancenter.enabled=false
                     </argLine>
