@@ -315,4 +315,19 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+    
+    <distributionManagement>
+        <repository>
+            <id>ipp-releases</id>
+            <name>IPP Releases</name>
+            <url>https://infinity.sungard.com/repository/ipp-releases</url>
+            <layout>default</layout>
+        </repository>
+        <snapshotRepository>
+            <id>ipp-snapshots</id>
+            <name>IPP Snapshots</name>
+            <url>https://infinity.sungard.com/repository/ipp-snapshots</url>
+            <layout>default</layout>
+        </snapshotRepository>
+      </distributionManagement>
 </project>
