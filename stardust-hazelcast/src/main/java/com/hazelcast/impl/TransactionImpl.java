@@ -32,19 +32,22 @@ import static com.hazelcast.nio.IOUtil.toObject;
 
 public class TransactionImpl implements Transaction {
 
-    public static final long DEFAULT_TXN_TIMEOUT = 30 * 1000;
+    private static final long DEFAULT_TXN_TIMEOUT = 30 * 1000;
 
     private final long id;
     private final FactoryImpl factory;
     private final List<TransactionRecord> transactionRecords = new CopyOnWriteArrayList<TransactionRecord>();
 
     private int status = TXN_STATUS_NO_TXN;
+    private long timeout;
     private final ILogger logger;
 
     public TransactionImpl(FactoryImpl factory, long txnId) {
         this.id = txnId;
         this.factory = factory;
         this.logger = factory.getLoggingService().getLogger(this.getClass().getName());
+
+        this.setTimeout(DEFAULT_TXN_TIMEOUT);
     }
 
     public Data attachPutOp(String name, Object key, Data value, boolean newRecord) {
@@ -254,7 +257,16 @@ public class TransactionImpl implements Transaction {
         return status;
     }
 
-    public boolean has(String name, Object key) {
+    
+    public long getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(long timeout) {
+		this.timeout = timeout;
+	}
+
+	public boolean has(String name, Object key) {
         return findTransactionRecord(name, key) != null;
     }
 
