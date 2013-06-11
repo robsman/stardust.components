@@ -91,9 +91,9 @@
     
     <distributionManagement>
         <repository>
-            <id>ipp-releases</id>
+            <id>ipp-3rd-party</id>
             <name>IPP Releases</name>
-            <url>https://infinity.sungard.com/repository/ipp-releases</url>
+            <url>https://infinity.sungard.com/repository/ipp-3rd-party</url>
             <layout>default</layout>
         </repository>
         <snapshotRepository>
