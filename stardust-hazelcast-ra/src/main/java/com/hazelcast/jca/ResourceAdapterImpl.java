@@ -74,10 +74,26 @@ public class ResourceAdapterImpl implements ResourceAdapter, Serializable {
         return new XAResource[0];
     }
 
+    /**
+     * <p>
+     * No-arg method needed for spring context configuration, i.e. <code>init-method</code>.
+     * </p>
+     * 
+     * <p>
+     * Simply delegates to {@link #start(BootstrapContext)} without any {@link BootstrapContext} (which
+     * isn't required anyway).
+     * </p>
+     * 
+    * @throws ResourceAdapterInternalException
+    */
+   public void start() throws ResourceAdapterInternalException {
+       start(null);
+    }
+    
     /* (non-Javadoc)
      * @see javax.resource.spi.ResourceAdapter#start(javax.resource.spi.BootstrapContext)
      */
-    public void start(BootstrapContext ctx) throws ResourceAdapterInternalException {
+    public void start(BootstrapContext ignored) throws ResourceAdapterInternalException {
     	// Gets/creates the hazelcast instance
     	ConfigBuilder config = buildConfiguration();
     	setHazelcast(Hazelcast.newHazelcastInstance(config.build()));;
