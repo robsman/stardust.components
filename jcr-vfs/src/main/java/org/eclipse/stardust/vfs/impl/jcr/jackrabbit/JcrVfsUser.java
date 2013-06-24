@@ -17,6 +17,7 @@ import java.util.Set;
 
 import javax.jcr.Credentials;
 import javax.jcr.RepositoryException;
+import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.Value;
 
 import org.apache.jackrabbit.api.security.principal.PrincipalIterator;
@@ -185,6 +186,18 @@ public class JcrVfsUser implements User
    }
 
    public String getDisabledReason() throws RepositoryException
+   {
+      throw new RuntimeException("Not implemented yet");
+   }
+   
+   public String getPath() throws UnsupportedRepositoryOperationException,
+         RepositoryException
+   {
+      throw new RuntimeException("Not implemented yet");
+   }
+
+   public void changePassword(String password, String oldPassword)
+         throws RepositoryException
    {
       throw new RuntimeException("Not implemented yet");
    }

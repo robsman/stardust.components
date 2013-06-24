@@ -17,6 +17,9 @@ package org.eclipse.stardust.vfs;
 import java.security.Principal;
 import java.util.Set;
 
+import org.eclipse.stardust.vfs.IAccessControlEntry.EntryType;
+
+
 
 /**
  * IAccessControlPolicy represents an access control list containing
@@ -27,7 +30,6 @@ import java.util.Set;
  */
 public interface IAccessControlPolicy 
 {
-
    /**
     * Creates a new access control entry and fills it with the principal and privileges 
     * passed.
@@ -37,6 +39,15 @@ public interface IAccessControlPolicy
    void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges);
    
    /**
+    * Creates a new access control entry and fills it with the principal and privileges 
+    * passed.
+    * @param principal
+    * @param privileges
+    * @param type
+    */
+   void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges, EntryType type);
+   
+   /**    
     * Removes a access control entry from this policy.
     * @param ace access control entry that is contained in this policy
     */

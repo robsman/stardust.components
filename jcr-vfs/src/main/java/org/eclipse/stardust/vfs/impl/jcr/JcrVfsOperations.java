@@ -24,9 +24,36 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import javax.jcr.*;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Binary;
+import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.NamespaceRegistry;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyIterator;
+import javax.jcr.PropertyType;
+import javax.jcr.ReferentialIntegrityException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.SimpleCredentials;
+import javax.jcr.UnsupportedRepositoryOperationException;
+import javax.jcr.Value;
+import javax.jcr.Workspace;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
@@ -38,7 +65,12 @@ import javax.jcr.nodetype.NodeTypeTemplate;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-import javax.jcr.security.*;
+import javax.jcr.security.AccessControlEntry;
+import javax.jcr.security.AccessControlList;
+import javax.jcr.security.AccessControlManager;
+import javax.jcr.security.AccessControlPolicy;
+import javax.jcr.security.AccessControlPolicyIterator;
+import javax.jcr.security.Privilege;
 import javax.jcr.version.OnParentVersionAction;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionException;
@@ -46,11 +78,13 @@ import javax.jcr.version.VersionHistory;
 import javax.jcr.version.VersionIterator;
 import javax.jcr.version.VersionManager;
 
+import org.apache.jackrabbit.api.security.JackrabbitAccessControlList;
 import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.jackrabbit.core.ItemManager;
 import org.apache.jackrabbit.core.SessionImpl;
 import org.apache.jackrabbit.core.XASessionImpl;
 import org.apache.jackrabbit.core.id.ItemId;
+import org.apache.jackrabbit.core.security.authorization.AccessControlEntryImpl;
 import org.apache.jackrabbit.jca.JCAManagedConnection;
 import org.apache.jackrabbit.jca.JCASessionHandle;
 import org.apache.jackrabbit.value.BooleanValue;
@@ -58,10 +92,36 @@ import org.apache.jackrabbit.value.DateValue;
 import org.apache.jackrabbit.value.DoubleValue;
 import org.apache.jackrabbit.value.LongValue;
 import org.apache.jackrabbit.value.StringValue;
-import org.eclipse.stardust.vfs.*;
 import org.eclipse.stardust.vfs.AccessControlException;
+import org.eclipse.stardust.vfs.IAccessControlEntry;
+import org.eclipse.stardust.vfs.IAccessControlEntry.EntryType;
+import org.eclipse.stardust.vfs.IAccessControlPolicy;
+import org.eclipse.stardust.vfs.IFile;
+import org.eclipse.stardust.vfs.IFileInfo;
+import org.eclipse.stardust.vfs.IFolder;
+import org.eclipse.stardust.vfs.IFolderInfo;
+import org.eclipse.stardust.vfs.IPrivilege;
+import org.eclipse.stardust.vfs.IResourceInfo;
+import org.eclipse.stardust.vfs.IllegalOperationException;
+import org.eclipse.stardust.vfs.MetaDataLocation;
+import org.eclipse.stardust.vfs.RepositoryOperationFailedException;
+import org.eclipse.stardust.vfs.VfsUtils;
 import org.eclipse.stardust.vfs.impl.jcr.jackrabbit.JcrVfsUserManager;
-import org.eclipse.stardust.vfs.impl.spi.*;
+import org.eclipse.stardust.vfs.impl.spi.JcrItem;
+import org.eclipse.stardust.vfs.impl.spi.JcrNamespaceRegistry;
+import org.eclipse.stardust.vfs.impl.spi.JcrNode;
+import org.eclipse.stardust.vfs.impl.spi.JcrNodeIterator;
+import org.eclipse.stardust.vfs.impl.spi.JcrNodeType;
+import org.eclipse.stardust.vfs.impl.spi.JcrProperty;
+import org.eclipse.stardust.vfs.impl.spi.JcrPropertyDefinition;
+import org.eclipse.stardust.vfs.impl.spi.JcrPropertyIterator;
+import org.eclipse.stardust.vfs.impl.spi.JcrQuery;
+import org.eclipse.stardust.vfs.impl.spi.JcrQueryManager;
+import org.eclipse.stardust.vfs.impl.spi.JcrQueryResult;
+import org.eclipse.stardust.vfs.impl.spi.JcrRepository;
+import org.eclipse.stardust.vfs.impl.spi.JcrSession;
+import org.eclipse.stardust.vfs.impl.spi.JcrVersionHistory;
+import org.eclipse.stardust.vfs.impl.spi.JcrWorkspace;
 import org.eclipse.stardust.vfs.impl.utils.CollectionUtils;
 import org.eclipse.stardust.vfs.impl.utils.CompareHelper;
 import org.eclipse.stardust.vfs.impl.utils.StringUtils;
@@ -1445,7 +1505,7 @@ public class JcrVfsOperations
          IAccessControlPolicy acp = applicablePolicies.iterator().next();
          acp.addAccessControlEntry(new JcrVfsPrincipal(principalName),
                Collections.singleton(getPrivilegeByName(
-                     getAccessControlManager(node.getSession()), iPriviligeName)));
+                     getAccessControlManager(node.getSession()), iPriviligeName)), EntryType.ALLOW);
 
          return acp;
       }
@@ -2755,8 +2815,9 @@ public class JcrVfsOperations
       {
          Set<IPrivilege> jcrPrivileges = toJcrPrivileges(acm, aces[i].getPrivileges());
 
+         final AccessControlEntryImpl aceImpl = castToJackrabbitACE(aces[i]);
          jcrAces.add(new JcrVfsAccessControlEntry(new JcrVfsPrincipal(
-               aces[i].getPrincipal().getName()), jcrPrivileges));
+               aces[i].getPrincipal().getName()), jcrPrivileges, aceImpl.isAllow() ? EntryType.ALLOW : EntryType.DENY));
       }
 
       if (isReadonly)
@@ -2883,8 +2944,10 @@ public class JcrVfsOperations
                filterInPrivilege(privileges, accessControlManager, jcrPrivilege);
             }
 
-            policy.addAccessControlEntry(ace.getPrincipal(),
-                  privileges.toArray(new Privilege[privileges.size()]));
+            final JackrabbitAccessControlList policyImpl = castToJackrabbitACL(policy);
+            policyImpl.addEntry(ace.getPrincipal(),
+                  privileges.toArray(new Privilege[privileges.size()]),
+                  ace.getType() == EntryType.ALLOW ? true : false);
          }
 
          if (policy.getAccessControlEntries().length != 0)
@@ -2915,8 +2978,10 @@ public class JcrVfsOperations
                filterInPrivilege(privileges, accessControlManager, jcrPrivilege);
             }
 
-            policy.addAccessControlEntry(ace.getPrincipal(),
-                  privileges.toArray(new Privilege[privileges.size()]));
+            final JackrabbitAccessControlList policyImpl = castToJackrabbitACL(policy);
+            policyImpl.addEntry(ace.getPrincipal(),
+                  privileges.toArray(new Privilege[privileges.size()]),
+                  ace.getType() == EntryType.ALLOW ? true : false);
          }
 
          ensureVersionIsModifiable(node);
@@ -3021,6 +3086,29 @@ public class JcrVfsOperations
       JcrNode.setProperty(nRoot, VFS_REPOSITORY_VERSION_PROPERTY, targetVersion);
    }
 
+   private static AccessControlEntryImpl castToJackrabbitACE(final AccessControlEntry ace)
+   {
+      if ( !(ace instanceof AccessControlEntryImpl))
+      {
+         throw new IllegalArgumentException(
+               "Given Access Control Entry is *NOT* the Jackrabbit implementation. Jackrabbit JCR implementation is required.");
+      }
+
+      return (AccessControlEntryImpl) ace;
+   }
+
+   private static JackrabbitAccessControlList castToJackrabbitACL(
+         final AccessControlList acl)
+   {
+      if ( !(acl instanceof JackrabbitAccessControlList))
+      {
+         throw new IllegalArgumentException(
+               "Given Access Control List is *NOT* the Jackrabbit implementation. Jackrabbit JCR implementation is required.");
+      }
+
+      return (JackrabbitAccessControlList) acl;
+   }   
+   
    private class MetaDataMigrationInfo
    {
       private Node metaData;

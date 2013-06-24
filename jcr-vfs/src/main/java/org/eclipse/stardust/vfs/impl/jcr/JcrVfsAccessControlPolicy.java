@@ -14,13 +14,13 @@
  */
 package org.eclipse.stardust.vfs.impl.jcr;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import java.security.Principal;
-
 import org.eclipse.stardust.vfs.IAccessControlEntry;
+import org.eclipse.stardust.vfs.IAccessControlEntry.EntryType;
 import org.eclipse.stardust.vfs.IAccessControlPolicy;
 import org.eclipse.stardust.vfs.IPrivilege;
 import org.eclipse.stardust.vfs.impl.utils.CollectionUtils;
@@ -49,7 +49,7 @@ public class JcrVfsAccessControlPolicy implements IAccessControlPolicy
       Set<IAccessControlEntry> result = CollectionUtils.newSet();
       for (IAccessControlEntry ace : this.aces)
       {
-         result.add(new JcrVfsAccessControlEntry(ace.getPrincipal(), new HashSet<IPrivilege>(ace.getPrivileges())));
+         result.add(new JcrVfsAccessControlEntry(ace.getPrincipal(), new HashSet<IPrivilege>(ace.getPrivileges()), ace.getType()));
       }
       return Collections.unmodifiableSet(result);
    }
@@ -71,9 +71,15 @@ public class JcrVfsAccessControlPolicy implements IAccessControlPolicy
 
    public void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges)
    {
-      this.aces.add(new JcrVfsAccessControlEntry(principal, privileges));
+      this.aces.add(new JcrVfsAccessControlEntry(principal, privileges, EntryType.ALLOW));
    }
 
+   public void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges,
+         EntryType type)
+   {
+      this.aces.add(new JcrVfsAccessControlEntry(principal, privileges, type));
+   }   
+   
    public void removeAccessControlEntry(IAccessControlEntry ace)
    {
       this.aces.remove(ace);
