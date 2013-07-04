@@ -76,7 +76,7 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 			throws ResourceException {
 		log(Level.FINEST, "createConnectionFactory cm: " + cm);
 		logHzConnectionEvent(this, HzConnectionEvent.FACTORY_INIT);
-		return new ConnectionFactoryImpl(this, cm);
+		return new HazelcastConnectionFactoryImpl(this, cm);
 	}
 
 	/* (non-Javadoc)

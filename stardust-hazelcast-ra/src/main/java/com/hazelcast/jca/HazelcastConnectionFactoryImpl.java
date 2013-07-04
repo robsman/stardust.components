@@ -33,7 +33,7 @@ import java.util.logging.Level;
  * vendor-specific calls with the real implementation classes of this 
  * resource adapter
  */
-public class ConnectionFactoryImpl implements HazelcastConnectionFactory {
+public class HazelcastConnectionFactoryImpl implements HazelcastConnectionFactory {
 	private static final long serialVersionUID = -5909363703528221650L;
 	/** Access to this resource adapter infrastructure */
 	private ManagedConnectionFactoryImpl mcf;
@@ -48,11 +48,11 @@ public class ConnectionFactoryImpl implements HazelcastConnectionFactory {
     /** this identity */
     private transient final int id;
 
-    public ConnectionFactoryImpl() {
+    public HazelcastConnectionFactoryImpl() {
     	id = idGen.incrementAndGet();
     }
     
-    public ConnectionFactoryImpl(ManagedConnectionFactoryImpl mcf, ConnectionManager cm) {
+    public HazelcastConnectionFactoryImpl(ManagedConnectionFactoryImpl mcf, ConnectionManager cm) {
     	this();
         this.mcf = mcf;
         this.cm = cm;
@@ -78,7 +78,7 @@ public class ConnectionFactoryImpl implements HazelcastConnectionFactory {
      * @see javax.resource.cci.ConnectionFactory#getMetaData()
      */
     public ResourceAdapterMetaData getMetaData() throws ResourceException {
-        return new ConnectionFactoryMetaData();
+        return new HazelcastConnectionFactoryMetaData();
     }
 
     /* (non-Javadoc)
@@ -123,7 +123,7 @@ public class ConnectionFactoryImpl implements HazelcastConnectionFactory {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ConnectionFactoryImpl other = (ConnectionFactoryImpl) obj;
+		HazelcastConnectionFactoryImpl other = (HazelcastConnectionFactoryImpl) obj;
 		if (id != other.id)
 			return false;
 		return true;

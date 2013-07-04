@@ -80,15 +80,17 @@ public class XAResourceImpl implements XAResource {
 		try {
 			ThreadContext tc = transactionCache.remove(xid);
 			if (tc != null) {
-				ThreadContext.get().setCallContext(tc.getCallContext());
-				ThreadContext.get().setCurrentFactory(tc.getCurrentFactory());
+                // Order is important...
+                ThreadContext.get().setCurrentFactory(tc.getCurrentFactory());
+                // and changed from 1.9 to 2.4!
+                ThreadContext.get().setCallContext(tc.getCallContext());
 				action.run(tc.getTransaction());
 			} else {
 				action.run(null);
 			}
 		} finally {
-			ThreadContext.get().setCallContext(oldTc.getCallContext());
 			ThreadContext.get().setCurrentFactory(oldTc.getCurrentFactory());
+			ThreadContext.get().setCallContext(oldTc.getCallContext());
 		}
 	}
 	
@@ -115,7 +117,6 @@ public class XAResourceImpl implements XAResource {
 				} else {
 					managedConnection.log(Level.WARNING, "XA rollback: No active transaction anymore" + xid);
 				}
-				transactionCache.remove(xid);
 			}
 		});
 	}

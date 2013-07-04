@@ -22,9 +22,9 @@ import javax.resource.cci.ResourceAdapterMetaData;
  * Simple implementation to return Hazelcast's implementation- 
  * specific information in a JCA-compatible format
  */
-final class ConnectionFactoryMetaData implements ResourceAdapterMetaData {
+final class HazelcastConnectionFactoryMetaData implements ResourceAdapterMetaData {
 	/** JCA-Connector specific java packge to be used for all information retrieval */
-	private static final Package HZ_PACKAGE = ConnectionFactoryImpl.class.getPackage();
+	private static final Package HZ_PACKAGE = HazelcastConnectionFactoryImpl.class.getPackage();
 
 	/** @return the implementation title from Hazelast
 	 */
