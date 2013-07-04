@@ -100,7 +100,7 @@
         <snapshotRepository>
             <id>ipp-snapshots</id>
             <name>IPP Snapshots</name>
-            <url>https://infinity.sungard.com/repository/ipp-snapshots</url>
+            <url>https://infinity.sungard.com/repository/ipp-3rd-party-nondistributable</url>
             <layout>default</layout>
         </snapshotRepository>
       </distributionManagement>
