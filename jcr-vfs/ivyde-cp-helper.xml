@@ -20,6 +20,8 @@
    
    <configurations>
       <conf name="compile" visibility="private" description="Compile Configuration" />
+      <!-- default configuration is needed by the IvyDE plugin to resolve the project as a dependency where needed -->
+      <conf name="default" />
    </configurations>
    
    <dependencies>
