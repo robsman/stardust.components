@@ -14,7 +14,7 @@
             xmlns:m="http://ant.apache.org/ivy/maven"
             xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-   <info organisation="org.eclipse.stardust.components" module="jcr-vfs" revision="2.4.0">
+   <info organisation="org.eclipse.stardust.components" module="jcr-vfs" revision="${ipp.version.full}">
       <license name="Eclipse Public License (EPL) - v1.0" url="http://www.eclipse.org/legal/epl-v10.html" />
    </info>
    
