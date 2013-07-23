@@ -89,19 +89,4 @@
             </plugin>
         </plugins>
     </build>
-    
-    <distributionManagement>
-        <repository>
-            <id>ipp-3rd-party</id>
-            <name>IPP Releases</name>
-            <url>https://infinity.sungard.com/repository/ipp-3rd-party</url>
-            <layout>default</layout>
-        </repository>
-        <snapshotRepository>
-            <id>ipp-snapshots</id>
-            <name>IPP Snapshots</name>
-            <url>https://infinity.sungard.com/repository/ipp-3rd-party-nondistributable</url>
-            <layout>default</layout>
-        </snapshotRepository>
-      </distributionManagement>
 </project>
