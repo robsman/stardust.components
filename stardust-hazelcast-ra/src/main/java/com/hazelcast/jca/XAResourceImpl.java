@@ -27,17 +27,8 @@ import javax.transaction.xa.Xid;
 import com.hazelcast.core.Transaction;
 import com.hazelcast.impl.ThreadContext;
 
-/**
- * Early version of XA support for Hazelcast.
- * This is still <b>BETA</b> code and should not be used in production code!
- */
 public class XAResourceImpl implements XAResource {
-/*
- * start
- * end
- * prepare
- * commit
- */
+   
 	private ManagedConnectionImpl managedConnection;
 	private int transactionTimeout;
 	private final static Map<Xid, ThreadContext> transactionCache = new ConcurrentHashMap<Xid, ThreadContext>();
