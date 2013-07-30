@@ -32,6 +32,7 @@
          <exclude org="javax.jcr" module="jcr" />
          <exclude org="org.apache.geronimo.specs" module="geronimo-j2ee-connector_1.5_spec" />
          <exclude org="org.apache.jackrabbit" module="jackrabbit-core" />
+         <exclude org="org.apache.tika" module="tika-parsers" />
          <exclude org="ch.qos.logback" module="logback-classic" />
          <exclude org="org.slf4j" module="jcl-over-slf4j" />
       </dependency>
