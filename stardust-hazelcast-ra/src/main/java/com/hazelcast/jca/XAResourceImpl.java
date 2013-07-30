@@ -125,7 +125,7 @@ public class XAResourceImpl implements XAResource {
 	public boolean isSameRM(XAResource arg0) throws XAException {
 		managedConnection.log(Level.FINEST, "XA isSameRM: " + arg0 );
 		boolean retValue = (arg0 instanceof XAResourceImpl);
-		managedConnection.log(Level.FINE, "this is " + (retValue?"":"not") + " the same RM as " + arg0);
+		managedConnection.log(Level.FINEST, "this is " + (retValue?"":"not") + " the same RM as " + arg0);
 		return retValue;
 	}
 
