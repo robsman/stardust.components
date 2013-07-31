@@ -182,6 +182,24 @@
          <artifactId>jackrabbit-jca</artifactId>
          <type>jar</type>
          <optional>true</optional>
+         <exclusions>
+            <exclusion>
+               <artifactId>xz</artifactId>
+               <groupId>org.tukaani</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>vorbis-java-tika</artifactId>
+               <groupId>org.gagravarr</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>vorbis-java-core</artifactId>
+               <groupId>org.gagravarr</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>netcdf</artifactId>
+               <groupId>edu.ucar</groupId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
