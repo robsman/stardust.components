@@ -34,7 +34,7 @@
         <resourceadapter-class>com.hazelcast.jca.ResourceAdapterImpl</resourceadapter-class>
         <config-property>
         	<description>Location of the hazelcast.xml file</description>
-        	<config-property-name>configurationLocation</config-property-name>
+        	<config-property-name>configLocation</config-property-name>
         	<config-property-type>java.lang.String</config-property-type>
         </config-property>
 
