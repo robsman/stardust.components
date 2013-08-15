@@ -79,6 +79,26 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
          </dependency>
+         <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>apache-mime4j-core</artifactId>
+            <version>${apache-mime4j-core.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>apache-mime4j-dom</artifactId>
+            <version>${apache-mime4j-dom.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${pdfbox.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>com.googlecode.mp4parser</groupId>
+            <artifactId>isoparser</artifactId>
+            <version>${isoparser.version}</version>
+         </dependency>
       </dependencies>
    </dependencyManagement>
 
@@ -175,6 +195,10 @@
                <groupId>org.apache.geronimo.specs</groupId>
                <artifactId>geronimo-stax-api_1.0_spec</artifactId>
             </exclusion>
+            <exclusion>
+               <artifactId>tika-core</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
          </exclusions>
       </dependency>
       <dependency>
@@ -184,20 +208,12 @@
          <optional>true</optional>
          <exclusions>
             <exclusion>
-               <artifactId>xz</artifactId>
-               <groupId>org.tukaani</groupId>
+               <artifactId>tika-parsers</artifactId>
+               <groupId>org.apache.tika</groupId>
             </exclusion>
             <exclusion>
-               <artifactId>vorbis-java-tika</artifactId>
-               <groupId>org.gagravarr</groupId>
-            </exclusion>
-            <exclusion>
-               <artifactId>vorbis-java-core</artifactId>
-               <groupId>org.gagravarr</groupId>
-            </exclusion>
-            <exclusion>
-               <artifactId>netcdf</artifactId>
-               <groupId>edu.ucar</groupId>
+               <artifactId>tika-core</artifactId>
+               <groupId>org.apache.tika</groupId>
             </exclusion>
          </exclusions>
       </dependency>
@@ -218,6 +234,45 @@
          <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
          <optional>true</optional>
       </dependency>
+      <dependency>
+         <groupId>org.apache.tika</groupId>
+         <artifactId>tika-parsers</artifactId>
+         <version>${tika-parsers.version}</version>
+         <optional>true</optional>
+         <exclusions>
+            <exclusion>
+               <artifactId>xz</artifactId>
+               <groupId>org.tukaani</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>vorbis-java-tika</artifactId>
+               <groupId>org.gagravarr</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>vorbis-java-core</artifactId>
+               <groupId>org.gagravarr</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>bcmail-jdk15</artifactId>
+               <groupId>org.bouncycastle</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>bcprov-jdk15</artifactId>
+               <groupId>org.bouncycastle</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>netcdf</artifactId>
+               <groupId>edu.ucar</groupId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.tika</groupId>
+         <artifactId>tika-core</artifactId>
+         <version>${tika-core.version}</version>
+         <optional>true</optional>
+      </dependency>
+
 
       <!-- ***************************************** -->
       <!--  test (to be refactored with CRNT-24151)  -->
@@ -255,6 +310,14 @@
             <exclusion>
                <artifactId>log4j-over-slf4j</artifactId>
                <groupId>org.slf4j</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>tika-parsers</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>tika-core</artifactId>
+               <groupId>org.apache.tika</groupId>
             </exclusion>
          </exclusions>
       </dependency>
