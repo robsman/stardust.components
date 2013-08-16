@@ -52,7 +52,7 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 	private ResourceAdapterImpl resourceAdapter;
 	/** Definies which events should be traced 
 	 * @see HzConnectionEvent */
-	private Set<HzConnectionEvent> hzConnectionTracingEvents;
+	private Set<HzConnectionEvent> hzConnectionTracingEvents = emptySet();
 	
 	/** Should connection events be traced or not
 	 * @see #hzConnectionTracingEvents  */
