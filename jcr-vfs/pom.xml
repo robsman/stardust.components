@@ -79,26 +79,6 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
          </dependency>
-         <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>apache-mime4j-core</artifactId>
-            <version>${apache-mime4j-core.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>apache-mime4j-dom</artifactId>
-            <version>${apache-mime4j-dom.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>${pdfbox.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>com.googlecode.mp4parser</groupId>
-            <artifactId>isoparser</artifactId>
-            <version>${isoparser.version}</version>
-         </dependency>
       </dependencies>
    </dependencyManagement>
 
