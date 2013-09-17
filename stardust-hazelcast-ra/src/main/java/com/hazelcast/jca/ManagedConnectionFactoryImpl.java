@@ -108,7 +108,11 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 	/* (non-Javadoc)
 	 * @see javax.resource.spi.ResourceAdapterAssociation#getResourceAdapter()
 	 */
-	public ResourceAdapterImpl getResourceAdapter() {
+	public ResourceAdapter getResourceAdapter() {
+		return getHzResourceAdapter();
+	}
+
+	public ResourceAdapterImpl getHzResourceAdapter() {
 		return resourceAdapter;
 	}
 

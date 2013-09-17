@@ -147,7 +147,7 @@ public class ManagedConnectionImpl extends JcaBase implements ManagedConnection 
 	}
 
 	private ResourceAdapterImpl getResourceAdapter() {
-		return factory.getResourceAdapter();
+		return factory.getHzResourceAdapter();
 	}
 
 	public XAResource getXAResource() throws ResourceException {
