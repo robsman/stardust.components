@@ -30,7 +30,7 @@
             <!-- <param name="config" value="${rep.home}/security.xml"/> -->
         </SecurityManager>
 
-        <AccessManager class="org.apache.jackrabbit.core.security.DefaultAccessManager">
+        <AccessManager class="org.eclipse.stardust.vfs.impl.jcr.jackrabbit.JcrVfsAccessManager">
             <!-- <param name="config" value="${rep.home}/access.xml"/> -->
         </AccessManager>
 

@@ -1,3 +1,0 @@
-added hazelcast-ra-infinity-1.0.jar with extended implementations for websphere and weblogic.
-edited ra.xml to use the factory from the new jar.
-added \META-INF\weblogic-ra.xml which sets the correct properties for weblogic.

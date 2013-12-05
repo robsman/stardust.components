@@ -22,52 +22,13 @@
    <groupId>org.eclipse.stardust.components</groupId>
    <artifactId>jcr-vfs</artifactId>
    <packaging>jar</packaging>
-   <version>2.4.0</version>
 
    <name>jcr-vfs</name>
    <url>https://portal.sungard.com/wiki/display/csa/Stargate</url>
    <description>A filesystem API on top of JCR.</description>
 
-   <issueManagement>
-      <system>JIRA</system>
-      <url>https://www.csa.sungard.com/jira/browse/CRNT</url>
-   </issueManagement>
-
-   <pluginRepositories>
-      <pluginRepository>
-         <id>central-plugin</id>
-         <name>Central PlugIn Repository</name>
-         <url>http://repo1.maven.org/maven2</url>
-      </pluginRepository>
-   </pluginRepositories>
-
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-      <geronimo-connector.version>2.2.1</geronimo-connector.version>
-      <geronimo-j2ee-connector_1.5_spec.version>2.0.0</geronimo-j2ee-connector_1.5_spec.version>
-      <geronimo-transaction.version>2.2.1</geronimo-transaction.version>
-      <commons-codec.version>1.3-eclipse01</commons-codec.version>
-      <commons-logging.version>1.1.1-eclipse01</commons-logging.version>
-      <commons-collections.version>3.2-eclipse01</commons-collections.version>
-      <jackrabbit-core.version>2.2.5-eclipse01</jackrabbit-core.version>
-      <jackrabbit-jca.version>2.2.5</jackrabbit-jca.version>
-      <junit.version>4.10</junit.version>
-      <jcr.version>2.0</jcr.version>
-      <spring-beans.version>3.0.5.RELEASE</spring-beans.version>
-      <spring-core.version>3.0.5.RELEASE</spring-core.version>
-      <spring-tx.version>3.0.5.RELEASE</spring-tx.version>
-      <servlet-api.version>2.4</servlet-api.version>
-      <commons-fileupload.version>1.2.1</commons-fileupload.version>
-      <commons-httpclient.version>3.0</commons-httpclient.version>
-      <jackrabbit-api.version>2.2.5</jackrabbit-api.version>
-      <jackrabbit-jcr-commons.version>2.2.5</jackrabbit-jcr-commons.version>
-      <jackrabbit-spi-commons.version>2.2.5</jackrabbit-spi-commons.version>
-      <spring-test.version>3.0.5.RELEASE</spring-test.version>
-      <jackrabbit-jcr-rmi.version>2.2.5</jackrabbit-jcr-rmi.version>
-      <spring-jms.version>3.0.5.RELEASE</spring-jms.version>
-      <jackrabbit-webapp.version>2.2.5</jackrabbit-webapp.version>
-      <jackrabbit-webdav.version>2.2.5</jackrabbit-webdav.version>
    </properties>
 
    <dependencyManagement>
@@ -214,6 +175,10 @@
                <groupId>org.apache.geronimo.specs</groupId>
                <artifactId>geronimo-stax-api_1.0_spec</artifactId>
             </exclusion>
+            <exclusion>
+               <artifactId>tika-core</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
          </exclusions>
       </dependency>
       <dependency>
@@ -221,6 +186,16 @@
          <artifactId>jackrabbit-jca</artifactId>
          <type>jar</type>
          <optional>true</optional>
+         <exclusions>
+            <exclusion>
+               <artifactId>tika-parsers</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>tika-core</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
@@ -239,6 +214,45 @@
          <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
          <optional>true</optional>
       </dependency>
+      <dependency>
+         <groupId>org.apache.tika</groupId>
+         <artifactId>tika-parsers</artifactId>
+         <version>${tika-parsers.version}</version>
+         <optional>true</optional>
+         <exclusions>
+            <exclusion>
+               <artifactId>xz</artifactId>
+               <groupId>org.tukaani</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>vorbis-java-tika</artifactId>
+               <groupId>org.gagravarr</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>vorbis-java-core</artifactId>
+               <groupId>org.gagravarr</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>bcmail-jdk15</artifactId>
+               <groupId>org.bouncycastle</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>bcprov-jdk15</artifactId>
+               <groupId>org.bouncycastle</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>netcdf</artifactId>
+               <groupId>edu.ucar</groupId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.tika</groupId>
+         <artifactId>tika-core</artifactId>
+         <version>${tika-core.version}</version>
+         <optional>true</optional>
+      </dependency>
+
 
       <!-- ***************************************** -->
       <!--  test (to be refactored with CRNT-24151)  -->
@@ -277,6 +291,14 @@
                <artifactId>log4j-over-slf4j</artifactId>
                <groupId>org.slf4j</groupId>
             </exclusion>
+            <exclusion>
+               <artifactId>tika-parsers</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>tika-core</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
          </exclusions>
       </dependency>
       <dependency>
@@ -286,19 +308,17 @@
          <type>jar</type>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <groupId>concurrent</groupId>
+         <artifactId>concurrent</artifactId>
+         <version>${concurrent.version}</version>
+         <type>jar</type>
+         <scope>test</scope>
+      </dependency>
    </dependencies>
 
    <build>
       <plugins>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.0.2</version>
-            <configuration>
-               <source>1.6</source>
-               <target>1.6</target>
-            </configuration>
-         </plugin>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
@@ -307,29 +327,23 @@
                <skip>true</skip>
             </configuration>
          </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+               <execution>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
       </plugins>
    </build>
 
    <profiles>
-      <profile>
-         <id>with-sources</id>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-source-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <phase>package</phase>
-                        <goals>
-                           <goal>jar</goal>
-                        </goals>
-                     </execution>
-                  </executions>
-               </plugin>
-            </plugins>
-         </build>
-      </profile>
       <profile>
          <id>stardust-build</id>
          <activation>
@@ -349,22 +363,5 @@
          </distributionManagement>
       </profile>
    </profiles>
-
-   <distributionManagement>
-      <repository>
-         <id>ipp-releases</id>
-         <name>IPP Releases</name>
-         <url>https://infinity.sungard.com/repository/ipp-releases</url>
-         <layout>default</layout>
-         <uniqueVersion>false</uniqueVersion>
-      </repository>
-      <snapshotRepository>
-         <id>ipp-snapshots</id>
-         <name>IPP Snapshots</name>
-         <url>https://infinity.sungard.com/repository/ipp-snapshots</url>
-         <layout>default</layout>
-         <uniqueVersion>false</uniqueVersion>
-      </snapshotRepository>
-   </distributionManagement>
 
 </project>

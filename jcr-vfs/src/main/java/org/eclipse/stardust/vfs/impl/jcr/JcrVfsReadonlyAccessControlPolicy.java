@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.stardust.vfs.IAccessControlEntry;
+import org.eclipse.stardust.vfs.IAccessControlEntry.EntryType;
 import org.eclipse.stardust.vfs.IAccessControlPolicy;
 import org.eclipse.stardust.vfs.IPrivilege;
 import org.eclipse.stardust.vfs.RepositoryOperationFailedException;
@@ -50,6 +51,12 @@ public class JcrVfsReadonlyAccessControlPolicy implements IAccessControlPolicy
    }
 
    public void removeAccessControlEntry(IAccessControlEntry ace)
+   {
+      throw new RepositoryOperationFailedException("Can not modify readonly access control policy.");
+   }
+   
+   public void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges,
+         EntryType entry)
    {
       throw new RepositoryOperationFailedException("Can not modify readonly access control policy.");
    }

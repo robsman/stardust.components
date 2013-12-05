@@ -14,12 +14,14 @@
             xmlns:m="http://ant.apache.org/ivy/maven"
             xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-   <info organisation="org.eclipse.stardust.components" module="jcr-vfs" revision="2.4.0">
+   <info organisation="org.eclipse.stardust.components" module="jcr-vfs" revision="${ipp.version.full}">
       <license name="Eclipse Public License (EPL) - v1.0" url="http://www.eclipse.org/legal/epl-v10.html" />
    </info>
    
    <configurations>
       <conf name="compile" visibility="private" description="Compile Configuration" />
+      <!-- default configuration is needed by the IvyDE plugin to resolve the project as a dependency where needed -->
+      <conf name="default" />
    </configurations>
    
    <dependencies>
@@ -27,6 +29,12 @@
             downloads a rar file instead of jar -->
       <dependency org="org.apache.jackrabbit" name="jackrabbit-jca" rev="${jackrabbit-jca.version}" transitive="false">
          <artifact name="jackrabbit-jca" type="jar" />
+         <exclude org="javax.jcr" module="jcr" />
+         <exclude org="org.apache.geronimo.specs" module="geronimo-j2ee-connector_1.5_spec" />
+         <exclude org="org.apache.jackrabbit" module="jackrabbit-core" />
+         <exclude org="org.apache.tika" module="tika-parsers" />
+         <exclude org="ch.qos.logback" module="logback-classic" />
+         <exclude org="org.slf4j" module="jcl-over-slf4j" />
       </dependency>
    </dependencies>
 </ivy-module>

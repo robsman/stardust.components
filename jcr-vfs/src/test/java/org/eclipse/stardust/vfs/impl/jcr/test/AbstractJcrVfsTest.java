@@ -320,6 +320,13 @@ public abstract class AbstractJcrVfsTest
    }
 
    @Test
+   public void testFindFilesByContent() throws Exception
+   {
+      assertEquals(1, jcrVfsWithAllPrivileges.findFiles("/jcr:root//element(*, nt:file) [jcr:contains(jcr:content, '%this Agreement%')]")
+            .size());
+   }
+
+   @Test
    public void testRetrieveFileContent() throws Exception
    {
       IFile fHase = jcrVfsWithAllPrivileges.getFile("/nase/hase.txt");

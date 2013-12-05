@@ -23,6 +23,16 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+   <dependencies>
+     <dependency>
+       <groupId>com.sun</groupId>
+       <artifactId>tools</artifactId>
+       <version>1.6.0</version>
+       <scope>system</scope>
+       <systemPath>${java.home}/../lib/tools.jar</systemPath>
+     </dependency>
+   </dependencies>
+
   <build>
     <filters>
       <filter>${product.properties.file}</filter>
@@ -60,15 +70,7 @@
       <properties>
          <product.properties.file>../../product/product-parent/src/main/filters/product.properties</product.properties.file>
       </properties>
-      <dependencies>
-        <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>tools</artifactId>
-          <version>1.6.0</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/../lib/tools.jar</systemPath>
-        </dependency>
-      </dependencies>
+
     </profile>
     <profile>
       <id>ipp-build</id>
@@ -79,4 +81,3 @@
   </profiles>
 
 </project>
-

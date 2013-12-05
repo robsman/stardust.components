@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import javax.jcr.RepositoryException;
+import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.Value;
 
 import org.apache.jackrabbit.api.security.principal.PrincipalIterator;
@@ -150,6 +151,12 @@ public class JcrVfsGroup implements Group
    }
 
    public boolean isDeclaredMember(Authorizable authorizable) throws RepositoryException
+   {
+      throw new RuntimeException("Not implemented yet");
+   }
+   
+   public String getPath() throws UnsupportedRepositoryOperationException,
+         RepositoryException
    {
       throw new RuntimeException("Not implemented yet");
    }

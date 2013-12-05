@@ -23,7 +23,7 @@ public class CustomJavaDocToc extends Doclet
 {
 	private static String TAB = "   ";
 
-	private static String docref = "html/handbooks/reference/api/engine/";
+	private static String docref = "html/reference/api/engine/";
 	private static String destdir;
 	private static String scope;
 	private static String tocname;
@@ -115,31 +115,31 @@ public class CustomJavaDocToc extends Doclet
 		{
 			tocname = "tocspi";
 			label = "@productnameonly@ Engine SPI";
-			docref = "html/handbooks/reference/api/spi/";
+			docref = "html/reference/api/spi/";
 		}
 		else if (scope.equals("webservices"))
 		{
 			tocname = "tocws";
 			label = "@productnameonly@ Web Services Engine API";
-			docref = "html/handbooks/reference/api/wsengine/";
+			docref = "html/reference/api/wsengine/";
 		}
 		else if (scope.equals("swing"))
 		{
 			tocname = "tocswing";
 			label = "@productnameonly@ Swing Portal API";
-			docref = "html/handbooks/reference/api/tds/";
+			docref = "html/reference/api/tds/";
 		} 
       else if (scope.equals("engine"))
 		{
 			tocname = "tocapi";
 			label = "@productnameonly@ Engine API";
-			docref = "html/handbooks/reference/api/engine/";
+			docref = "html/reference/api/engine/";
 		}
       else
       {
 			tocname = "toc" + scope;
 			label = "@productnameonly@ " + Character.toUpperCase(scope.charAt(0)) + scope.substring(1) + " API";
-			docref = "html/handbooks/reference/api/" + scope + "/";
+			docref = "html/reference/api/" + scope + "/";
       }
 	}
 	

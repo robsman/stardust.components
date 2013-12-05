@@ -148,5 +148,11 @@ public class JcrVfsUserManager implements UserManager, SessionListener {
    {
       throw new RuntimeException("Not implemented yet");
    }
+   
+   public Authorizable getAuthorizableByPath(String path)
+         throws UnsupportedRepositoryOperationException, RepositoryException
+   {
+      throw new RuntimeException("Not implemented yet");
+   }
 
 }

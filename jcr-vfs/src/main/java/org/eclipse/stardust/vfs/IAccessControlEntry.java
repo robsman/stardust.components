@@ -40,4 +40,10 @@ public interface IAccessControlEntry
     */
    Set<IPrivilege> getPrivileges();
    
+   EntryType getType();   
+   
+   public static enum EntryType 
+   {
+      ALLOW, DENY;
+   }   
 }

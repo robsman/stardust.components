@@ -26,22 +26,35 @@ import org.eclipse.stardust.vfs.IPrivilege;
  * @author rsauer
  * @version $Revision: 24736 $
  */
-public class JcrVfsAccessControlEntry implements IAccessControlEntry 
+public class JcrVfsAccessControlEntry implements IAccessControlEntry
 {
 
    private final Set<IPrivilege> privileges;
    private final Principal principal;
+   private final EntryType type;
    
    public JcrVfsAccessControlEntry(Principal principal, Set<IPrivilege> privileges)
    {
+      this(principal, privileges, null);
+   }
+   
+   public JcrVfsAccessControlEntry(Principal principal, Set<IPrivilege> privileges, EntryType type)
+   {      
       this.privileges = privileges;
       this.principal = principal;
+      this.type = (type != null ? type : EntryType.ALLOW);
    }
    
    public Principal getPrincipal()
    {
       return this.principal;
    }
+   
+   public EntryType getType()
+   {
+      return type;
+   }
+         
 
    public Set<IPrivilege> getPrivileges()
    {
@@ -55,6 +68,7 @@ public class JcrVfsAccessControlEntry implements IAccessControlEntry
       sb.append(this.principal);
       sb.append(": ");
       sb.append(this.privileges);
+      sb.append(" (" + type + ")");
       
       return sb.toString();
    }
@@ -66,6 +80,7 @@ public class JcrVfsAccessControlEntry implements IAccessControlEntry
       int result = 1;
       result = prime * result + ((principal == null) ? 0 : principal.hashCode());
       result = prime * result + ((privileges == null) ? 0 : privileges.hashCode());
+      result = prime * result + type.hashCode();
       return result;
    }
 
@@ -93,6 +108,8 @@ public class JcrVfsAccessControlEntry implements IAccessControlEntry
       }
       else if ( !getPrivileges().equals(other.getPrivileges()))
          return false;
+      if ( !getType().equals(other.getType()))
+         return false;      
       return true;
    }
    
