@@ -28,114 +28,173 @@ import com.hazelcast.core.Transaction;
 import com.hazelcast.impl.ThreadContext;
 
 public class XAResourceImpl implements XAResource {
-   
 	private ManagedConnectionImpl managedConnection;
 	private int transactionTimeout;
 	private final static Map<Xid, ThreadContext> transactionCache = new ConcurrentHashMap<Xid, ThreadContext>();
 
-	public XAResourceImpl(ManagedConnectionImpl managedConnectionImpl) {
+	public XAResourceImpl(final ManagedConnectionImpl managedConnectionImpl) {
 		this.managedConnection = managedConnectionImpl;
 	}
-	
-	public void start(Xid xid, int arg1) throws XAException {
-		managedConnection.log(Level.FINEST, "XA start: " + xid);
-		Transaction tx = managedConnection.getHazelcastInstance().getTransaction();
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#start(javax.transaction.xa.Xid, int)
+	 */
+	public void start(final Xid xid, final int flag) throws XAException {
+		managedConnection.log(Level.FINEST, "Start XA transaction with XID '" + xid + "' and flag '" + flag + "'.");
+
+		final Transaction tx = managedConnection.getHazelcastInstance().getTransaction();
+		/* only start tx if not already done */
 		if (Transaction.TXN_STATUS_ACTIVE != tx.getStatus()) {
 			tx.setTimeout(transactionTimeout * 1000);
 			tx.begin();
 		}
 		transactionCache.put(xid, ThreadContext.get());
-		// No tx start here - already started
 	}
 
-	public void end(Xid xvid, int arg1) throws XAException {
-		// Nothing to do
-		managedConnection.log(Level.FINEST, "XA end: " + xvid + ", " + arg1);
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#end(javax.transaction.xa.Xid, int)
+	 */
+	public void end(final Xid xid, final int flag) throws XAException {
+		managedConnection.log(Level.FINEST, "End XA transaction with XID '" + xid + "' and flag '" + flag + "'.");
+
+      /* nothing to do */
 	}
-	
-	public int prepare(Xid xid) throws XAException {
-		managedConnection.log(Level.FINEST, "XA prepare: " + xid);
-		//Everything is in memory, all modified elements are already locked by Hazelcast itself
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#prepare(javax.transaction.xa.Xid)
+	 */
+	public int prepare(final Xid xid) throws XAException {
+		managedConnection.log(Level.FINEST, "Prepare XA transaction with XID '" + xid + "'.");
+
+		/* nothing to do: locks are already held by Hazelcast */
 		return XA_OK;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#commit(javax.transaction.xa.Xid, boolean)
+	 */
+	public void commit(final Xid xid, final boolean onePhase) throws XAException {
+		doInRestoredThreadContext(xid, new Action() {
+			public void run(final Transaction tx) {
+				if (tx != null) {
+					commitInternal(xid, onePhase, tx);
+				} else {
+					managedConnection.log(Level.SEVERE, "Failed to commit XA transaction with XID '" + xid + "' (onePhase = " + onePhase + "): Transaction cannot be found.");
+				}
+			}
+		});
+	}
+
+	private void commitInternal(final Xid xid, final boolean onePhase, final Transaction tx) {
+	   managedConnection.log(Level.FINEST, "Commit XA transaction with XID '" + xid + "' (onePhase = " + onePhase + ").");
+      try {
+         tx.commit();
+         managedConnection.log(Level.FINEST, "Commited XA transaction with XID '" + xid + "' (onePhase = " + onePhase + ").");
+      } catch (final Exception e) {
+         managedConnection.log(Level.SEVERE, "Failed to commit XA transaction with XID '" + xid + "' (onePhase = " + onePhase + "): ", e);
+         rollbackInternal(xid, tx);
+      }
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#rollback(javax.transaction.xa.Xid)
+	 */
+	public void rollback(final Xid xid) throws XAException {
+		doInRestoredThreadContext(xid, new Action() {
+			public void run(final Transaction tx) {
+				if (tx != null) {
+				   rollbackInternal(xid, tx);
+				} else {
+				   /* nothing we can do here: locks will be released only after tx timeout */
+					managedConnection.log(Level.SEVERE, "Failed to rollback XA transaction with XID '" + xid + "': Transaction cannot be found.");
+				}
+			}
+		});
+	}
+
+	private void rollbackInternal(final Xid xid, final Transaction tx) {
+	   managedConnection.log(Level.FINEST, "Rollback XA transaction with XID '" + xid + "'.");
+      try {
+         tx.rollback();
+         managedConnection.log(Level.FINEST, "Rolledback XA transaction with XID '" + xid + "'.");
+      } catch (final Exception e) {
+         /* nothing we can do here: locks will be released only after tx timeout */
+         managedConnection.log(Level.SEVERE, "Failed to rollback XA transaction with XID '" + xid + "': ", e);
+      }
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#recover(int)
+	 */
+	public Xid[] recover(final int flag) throws XAException {
+		managedConnection.log(Level.FINEST, "Recover XA transaction with flag '" + flag + "'.");
+
+		return new Xid[0];
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#forget(javax.transaction.xa.Xid)
+	 */
+	public void forget(final Xid xid) throws XAException {
+		managedConnection.log(Level.FINEST, "Forget XA transaction with XID '" + xid + "'.");
+
+		transactionCache.remove(xid);
+		/* nothing we can do here */
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#isSameRM(javax.transaction.xa.XAResource)
+	 */
+	public boolean isSameRM(final XAResource xaResource) throws XAException {
+		managedConnection.log(Level.FINEST, "XA isSameRM(): " + xaResource);
+
+		final boolean isSameRm = (xaResource instanceof XAResourceImpl);
+		managedConnection.log(Level.FINEST, "This is " + (isSameRm ? "" : "not") + " the same RM as " + xaResource + ".");
+		return isSameRm;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#setTransactionTimeout(int)
+	 */
+	public boolean setTransactionTimeout(final int seconds) {
+		managedConnection.log(Level.FINEST, "Set XA transaction timeout to " + seconds + " seconds.");
+
+		this.transactionTimeout = seconds;
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.transaction.xa.XAResource#getTransactionTimeout()
+	 */
+	public int getTransactionTimeout() throws XAException {
+		managedConnection.log(Level.FINEST, "Get XA transaction timeout: '" + transactionTimeout + "'.");
+
+		return transactionTimeout;
 	}
 
 	/**
 	 * Used in {@link XAResourceImpl#doInRestoredThreadContext(Xid, Action)}
 	 */
-	protected interface Action {
-		void run(Transaction tx);
+	/* package-private */ interface Action {
+		void run(final Transaction tx);
 	}
-	
-	protected void doInRestoredThreadContext(Xid xid, Action action) {
-		ThreadContext oldTc = ThreadContext.get();
-		try {
-			ThreadContext tc = transactionCache.remove(xid);
-			if (tc != null) {
-                // Order is important...
-                ThreadContext.get().setCurrentFactory(tc.getCurrentFactory());
-                // and changed from 1.9 to 2.4!
-                ThreadContext.get().setCallContext(tc.getCallContext());
-				action.run(tc.getTransaction());
-			} else {
-				action.run(null);
-			}
-		} finally {
-			ThreadContext.get().setCurrentFactory(oldTc.getCurrentFactory());
-			ThreadContext.get().setCallContext(oldTc.getCallContext());
+
+	/* package-private */ void doInRestoredThreadContext(final Xid xid, final Action action) {
+		final ThreadContext tc = transactionCache.remove(xid);
+		if (tc != null) {
+		   final ThreadContext oldTc = ThreadContext.get();
+		   try {
+		      /* Order is important ... */
+		      ThreadContext.get().setCurrentFactory(tc.getCurrentFactory());
+		      /* ... and changed from 1.9 to 2.4! */
+		      ThreadContext.get().setCallContext(tc.getCallContext());
+		      action.run(tc.getTransaction());
+		   } finally {
+		      ThreadContext.get().setCurrentFactory(oldTc.getCurrentFactory());
+		      ThreadContext.get().setCallContext(oldTc.getCallContext());
+		   }
+		} else {
+			action.run(null);
 		}
 	}
-	
-	public void commit(final Xid xid, boolean onePhase) throws XAException {
-		doInRestoredThreadContext(xid, new Action() {
-			public void run(Transaction tx) {
-				if (tx != null) {
-					managedConnection.log(Level.FINEST, "XA commit: " + xid);
-					tx.commit();
-				} else {
-					managedConnection.log(Level.WARNING, "XA commit: No active transaction anymore" + xid);
-				}
-			}
-		});
-		
-	}
-	
-	public void rollback(final Xid xid) throws XAException {
-		doInRestoredThreadContext(xid, new Action() {
-			public void run(Transaction tx) {
-				if (tx != null) {
-					managedConnection.log(Level.FINEST, "XA rollback: " + xid);
-					tx.rollback();
-				} else {
-					managedConnection.log(Level.WARNING, "XA rollback: No active transaction anymore" + xid);
-				}
-			}
-		});
-	}
-
-	public Xid[] recover(int arg0) throws XAException {
-		managedConnection.log(Level.FINEST, "XA recover: " + arg0);
-		return new Xid[0];
-	}
-	
-	public void forget(Xid xvid) throws XAException {
-		managedConnection.log(Level.FINEST, "XA forget: " + xvid);
-		transactionCache.remove(xvid);
-	}
-
-	public boolean isSameRM(XAResource arg0) throws XAException {
-		managedConnection.log(Level.FINEST, "XA isSameRM: " + arg0 );
-		boolean retValue = (arg0 instanceof XAResourceImpl);
-		managedConnection.log(Level.FINEST, "this is " + (retValue?"":"not") + " the same RM as " + arg0);
-		return retValue;
-	}
-
-	public boolean setTransactionTimeout(int seconds) {
-		this.transactionTimeout = seconds;
-		return true;
-	}
-	
-	public int getTransactionTimeout() throws XAException {
-		return this.transactionTimeout;
-	}
-
 }
