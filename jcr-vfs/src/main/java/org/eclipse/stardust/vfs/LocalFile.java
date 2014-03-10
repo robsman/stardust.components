@@ -67,7 +67,7 @@ public class LocalFile extends FileInfo
 
          if (contentStreams.isEmpty())
          {
-            this.contentStreams = CollectionUtils.createList();
+            this.contentStreams = CollectionUtils.newList();
          }
          contentStreams.add(contentStream);
 
