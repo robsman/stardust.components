@@ -49,19 +49,18 @@ public class JcrDocumentRepositoryServiceBean extends JcrDocumentRepositoryServi
    public ISessionFactory getSessionFactory()
    {
       ISessionFactory sessionFactory = super.getSessionFactory();
-      
+
       if ((null == sessionFactory) && !isEmpty(jcrSessionFactoryName)
             && beanFactory.containsBean(jcrSessionFactoryName))
       {
-         sessionFactory = (ISessionFactory) beanFactory.getBean(jcrSessionFactoryName,
-               ISessionFactory.class);
-         
+         sessionFactory = beanFactory.getBean(jcrSessionFactoryName, ISessionFactory.class);
+
          if (null != sessionFactory)
          {
             setSessionFactory(sessionFactory);
          }
       }
-      
+
       return sessionFactory;
    }
 
