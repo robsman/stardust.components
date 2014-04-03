@@ -32,14 +32,14 @@ public class JcrVfsAccessControlEntry implements IAccessControlEntry
    private final Set<IPrivilege> privileges;
    private final Principal principal;
    private final EntryType type;
-   
+
    public JcrVfsAccessControlEntry(Principal principal, Set<IPrivilege> privileges)
    {
       this(principal, privileges, null);
    }
    
    public JcrVfsAccessControlEntry(Principal principal, Set<IPrivilege> privileges, EntryType type)
-   {      
+   {
       this.privileges = privileges;
       this.principal = principal;
       this.type = (type != null ? type : EntryType.ALLOW);
@@ -50,17 +50,16 @@ public class JcrVfsAccessControlEntry implements IAccessControlEntry
       return this.principal;
    }
    
-   public EntryType getType()
-   {
-      return type;
-   }
-         
-
    public Set<IPrivilege> getPrivileges()
    {
       return this.privileges;
    }
 
+   public EntryType getType()
+   {
+      return type;
+   }
+   
    @Override
    public String toString()
    {
@@ -109,7 +108,7 @@ public class JcrVfsAccessControlEntry implements IAccessControlEntry
       else if ( !getPrivileges().equals(other.getPrivileges()))
          return false;
       if ( !getType().equals(other.getType()))
-         return false;      
+         return false;
       return true;
    }
    

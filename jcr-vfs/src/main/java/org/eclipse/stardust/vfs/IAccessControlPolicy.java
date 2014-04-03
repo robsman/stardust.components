@@ -20,7 +20,6 @@ import java.util.Set;
 import org.eclipse.stardust.vfs.IAccessControlEntry.EntryType;
 
 
-
 /**
  * IAccessControlPolicy represents an access control list containing
  * IAccessControlEntry objects.
@@ -47,7 +46,7 @@ public interface IAccessControlPolicy
     */
    void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges, EntryType type);
    
-   /**    
+   /**
     * Removes a access control entry from this policy.
     * @param ace access control entry that is contained in this policy
     */

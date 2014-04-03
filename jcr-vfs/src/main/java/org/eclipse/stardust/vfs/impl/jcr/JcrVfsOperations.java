@@ -9,7 +9,7 @@
  *    SunGard CSA LLC - initial API and implementation and/or initial documentation
  *******************************************************************************/
 /*
- * $Id: JcrVfsOperations.java 54136 2012-02-29 12:33:54Z sven.rottstock $
+ * $Id: JcrVfsOperations.java 65704 2013-06-24 15:15:00Z thomas.wolfram $
  * (C) 2000 - 2008 CARNOT AG
  */
 package org.eclipse.stardust.vfs.impl.jcr;
@@ -129,7 +129,7 @@ import org.eclipse.stardust.vfs.impl.utils.StringUtils;
 
 /**
  * @author rsauer
- * @version $Revision: 54136 $
+ * @version $Revision: 65704 $
  */
 public class JcrVfsOperations
 {
@@ -3093,10 +3093,10 @@ public class JcrVfsOperations
          throw new IllegalArgumentException(
                "Given Access Control Entry is *NOT* the Jackrabbit implementation. Jackrabbit JCR implementation is required.");
       }
-
+      
       return (AccessControlEntryImpl) ace;
    }
-
+   
    private static JackrabbitAccessControlList castToJackrabbitACL(
          final AccessControlList acl)
    {
@@ -3105,9 +3105,9 @@ public class JcrVfsOperations
          throw new IllegalArgumentException(
                "Given Access Control List is *NOT* the Jackrabbit implementation. Jackrabbit JCR implementation is required.");
       }
-
+      
       return (JackrabbitAccessControlList) acl;
-   }   
+   }
    
    private class MetaDataMigrationInfo
    {

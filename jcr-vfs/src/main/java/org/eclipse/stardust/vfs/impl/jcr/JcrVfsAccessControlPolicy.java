@@ -73,13 +73,12 @@ public class JcrVfsAccessControlPolicy implements IAccessControlPolicy
    {
       this.aces.add(new JcrVfsAccessControlEntry(principal, privileges, EntryType.ALLOW));
    }
-
-   public void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges,
-         EntryType type)
+   
+   public void addAccessControlEntry(Principal principal, Set<IPrivilege> privileges, EntryType type)
    {
       this.aces.add(new JcrVfsAccessControlEntry(principal, privileges, type));
-   }   
-   
+   }
+
    public void removeAccessControlEntry(IAccessControlEntry ace)
    {
       this.aces.remove(ace);

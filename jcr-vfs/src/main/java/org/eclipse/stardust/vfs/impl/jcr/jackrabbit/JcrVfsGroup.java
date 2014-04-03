@@ -160,5 +160,4 @@ public class JcrVfsGroup implements Group
    {
       throw new RuntimeException("Not implemented yet");
    }
-
 }
