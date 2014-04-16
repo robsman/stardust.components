@@ -4,21 +4,23 @@ import java.io.IOException;
 
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.jackrabbit.api.JackrabbitRepository;
 import org.apache.jackrabbit.core.RepositoryImpl;
 import org.apache.jackrabbit.core.config.RepositoryConfig;
+import org.eclipse.stardust.vfs.impl.jcr.jackrabbit.JackrabbitRepositoryContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
 
 public class JackrabbitRepositoryStartupBean
-      implements InitializingBean, DisposableBean, ApplicationContextAware
+      implements InitializingBean, DisposableBean, ApplicationContextAware,
+      FactoryBean<Repository>
 {
    private String jndiName;
 
@@ -26,23 +28,36 @@ public class JackrabbitRepositoryStartupBean
 
    private String repositoryHome;
 
-   private JackrabbitRepository repository;
-
    private ApplicationContext applicationContext;
-
-   private InitialContext jndiContext;
 
    public JackrabbitRepositoryStartupBean()
    {
    }
 
+   public Repository getObject()
+   {
+      return JackrabbitRepositoryContext.getRepositoryContext().get(jndiName);
+   }
+
+   public Class< ? > getObjectType()
+   {
+      Repository repository = JackrabbitRepositoryContext.getRepositoryContext().get(
+            jndiName);
+      return (repository != null ? repository.getClass() : null);
+   }
+
+   public boolean isSingleton()
+   {
+      return true;
+   }
+
    @Override
    public void afterPropertiesSet() throws Exception
    {
-      repository = connect(jndiName, repositoryConfig, repositoryHome);
+      connect(jndiName, repositoryConfig, repositoryHome);
    }
 
-   private JackrabbitRepository connect(String jndiName, String repositoryConfig,
+   private synchronized void connect(String jndiName, String repositoryConfig,
          String repositoryHome) throws IOException, NamingException, RepositoryException
    {
       if (jndiName == null)
@@ -58,16 +73,8 @@ public class JackrabbitRepositoryStartupBean
          throw new IllegalArgumentException("repositoryHome: " + repositoryHome);
       }
 
-      JackrabbitRepository repository;
-      jndiContext = new InitialContext();
-      try
-      {
-         repository = (JackrabbitRepository) jndiContext.lookup(jndiName);
-      }
-      catch (NamingException e1)
-      {
-         repository = null;
-      }
+      Repository repository = JackrabbitRepositoryContext.getRepositoryContext().get(
+            jndiName);
 
       if (repository == null)
       {
@@ -83,23 +90,25 @@ public class JackrabbitRepositoryStartupBean
                   repositoryHome);
             repository = RepositoryImpl.create(config);
 
-            jndiContext.bind(jndiName, repository);
+            JackrabbitRepositoryContext.getRepositoryContext().put(jndiName, repository);
+            JackrabbitRepositoryContext.getJndiContext().bind(jndiName, repository);
          }
       }
-
-      return repository;
    }
 
    @Override
-   public void destroy() throws Exception
+   public synchronized void destroy() throws Exception
    {
+      Repository repository = JackrabbitRepositoryContext.getRepositoryContext().get(
+            jndiName);
       if (repository != null)
       {
-         jndiContext.unbind(jndiName);
-         jndiContext = null;
-         
-         repository.shutdown();
-         repository = null;
+         JackrabbitRepositoryContext.unbind(jndiName);
+         if (repository instanceof JackrabbitRepository)
+         {
+            ((JackrabbitRepository) repository).shutdown();
+         }
+         JackrabbitRepositoryContext.getRepositoryContext().remove(repository);
       }
    }
 
@@ -141,7 +150,7 @@ public class JackrabbitRepositoryStartupBean
 
    public Repository getRepository()
    {
-      return repository;
+      return JackrabbitRepositoryContext.getRepositoryContext().get(jndiName);
    }
 
 }
