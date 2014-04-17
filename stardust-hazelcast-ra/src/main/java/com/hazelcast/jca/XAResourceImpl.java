@@ -29,7 +29,7 @@ import com.hazelcast.impl.ThreadContext;
 
 public class XAResourceImpl implements XAResource {
 	private ManagedConnectionImpl managedConnection;
-	private int transactionTimeout;
+	private int transactionTimeout = -1;
 	private final static Map<Xid, ThreadContext> transactionCache = new ConcurrentHashMap<Xid, ThreadContext>();
 
 	public XAResourceImpl(final ManagedConnectionImpl managedConnectionImpl) {
@@ -45,7 +45,9 @@ public class XAResourceImpl implements XAResource {
 		final Transaction tx = managedConnection.getHazelcastInstance().getTransaction();
 		/* only start tx if not already done */
 		if (Transaction.TXN_STATUS_ACTIVE != tx.getStatus()) {
-			tx.setTimeout(transactionTimeout * 1000);
+		   if (transactionTimeout != -1) {
+		      tx.setTimeout(transactionTimeout * 1000);
+		   }
 			tx.begin();
 		}
 		transactionCache.put(xid, ThreadContext.get());
