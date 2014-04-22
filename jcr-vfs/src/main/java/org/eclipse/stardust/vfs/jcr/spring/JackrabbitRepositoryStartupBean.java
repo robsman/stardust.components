@@ -36,12 +36,12 @@ public class JackrabbitRepositoryStartupBean
 
    public Repository getObject()
    {
-      return JackrabbitRepositoryContext.getRepositoryContext().get(jndiName);
+      return JackrabbitRepositoryContext.getRepository(jndiName);
    }
 
    public Class< ? > getObjectType()
    {
-      Repository repository = JackrabbitRepositoryContext.getRepositoryContext().get(
+      Repository repository = JackrabbitRepositoryContext.getRepository(
             jndiName);
       return (repository != null ? repository.getClass() : null);
    }
@@ -73,7 +73,7 @@ public class JackrabbitRepositoryStartupBean
          throw new IllegalArgumentException("repositoryHome: " + repositoryHome);
       }
 
-      Repository repository = JackrabbitRepositoryContext.getRepositoryContext().get(
+      Repository repository = JackrabbitRepositoryContext.getRepository(
             jndiName);
 
       if (repository == null)
@@ -90,8 +90,8 @@ public class JackrabbitRepositoryStartupBean
                   repositoryHome);
             repository = RepositoryImpl.create(config);
 
-            JackrabbitRepositoryContext.getRepositoryContext().put(jndiName, repository);
-            JackrabbitRepositoryContext.getJndiContext().bind(jndiName, repository);
+            JackrabbitRepositoryContext.putRepository(jndiName, repository);
+            JackrabbitRepositoryContext.bind(jndiName, repository);
          }
       }
    }
@@ -99,7 +99,7 @@ public class JackrabbitRepositoryStartupBean
    @Override
    public synchronized void destroy() throws Exception
    {
-      Repository repository = JackrabbitRepositoryContext.getRepositoryContext().get(
+      Repository repository = JackrabbitRepositoryContext.getRepository(
             jndiName);
       if (repository != null)
       {
@@ -108,7 +108,7 @@ public class JackrabbitRepositoryStartupBean
          {
             ((JackrabbitRepository) repository).shutdown();
          }
-         JackrabbitRepositoryContext.getRepositoryContext().remove(repository);
+         JackrabbitRepositoryContext.removeRepository(repository);
       }
    }
 
@@ -150,7 +150,7 @@ public class JackrabbitRepositoryStartupBean
 
    public Repository getRepository()
    {
-      return JackrabbitRepositoryContext.getRepositoryContext().get(jndiName);
+      return JackrabbitRepositoryContext.getRepository(jndiName);
    }
 
 }
