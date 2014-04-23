@@ -103,10 +103,10 @@ public class JackrabbitRepositoryContext
       }
    }
 
-   public synchronized static Map<String, Repository> putRepository(String jndiName,
+   public synchronized static void putRepository(String jndiName,
          Repository repository)
    {
-      return repositoryContext;
+      repositoryContext.put(jndiName, repository);
    }
 
    public synchronized static Repository getRepository(String jndiName)

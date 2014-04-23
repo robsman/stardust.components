@@ -29,9 +29,12 @@ public class JackrabbitRepositoryStartupBean
    private String repositoryHome;
 
    private ApplicationContext applicationContext;
+   
+   private boolean bindToJndi;
 
    public JackrabbitRepositoryStartupBean()
    {
+      bindToJndi = true;
    }
 
    public Repository getObject()
@@ -91,7 +94,10 @@ public class JackrabbitRepositoryStartupBean
             repository = RepositoryImpl.create(config);
 
             JackrabbitRepositoryContext.putRepository(jndiName, repository);
-            JackrabbitRepositoryContext.bind(jndiName, repository);
+            if (bindToJndi)
+            {
+               JackrabbitRepositoryContext.bind(jndiName, repository);
+            }
          }
       }
    }
@@ -103,7 +109,10 @@ public class JackrabbitRepositoryStartupBean
             jndiName);
       if (repository != null)
       {
-         JackrabbitRepositoryContext.unbind(jndiName);
+         if (bindToJndi)
+         {
+            JackrabbitRepositoryContext.unbind(jndiName);
+         }
          if (repository instanceof JackrabbitRepository)
          {
             ((JackrabbitRepository) repository).shutdown();
@@ -153,4 +162,14 @@ public class JackrabbitRepositoryStartupBean
       return JackrabbitRepositoryContext.getRepository(jndiName);
    }
 
+   public boolean isBindToJndi()
+   {
+      return bindToJndi;
+   }
+
+   public void setBindToJndi(boolean bindToJndi)
+   {
+      this.bindToJndi = bindToJndi;
+   }
+   
 }
