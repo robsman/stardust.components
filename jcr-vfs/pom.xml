@@ -24,63 +24,7 @@
    <packaging>jar</packaging>
 
    <name>jcr-vfs</name>
-   <url>https://portal.sungard.com/wiki/display/csa/Stargate</url>
    <description>A filesystem API on top of JCR.</description>
-
-   <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-   </properties>
-
-   <dependencyManagement>
-      <dependencies>
-         <dependency>
-            <groupId>org.apache.geronimo.components</groupId>
-            <artifactId>geronimo-connector</artifactId>
-            <version>${geronimo-connector.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
-            <version>${geronimo-j2ee-connector_1.5_spec.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.apache.geronimo.components</groupId>
-            <artifactId>geronimo-transaction</artifactId>
-            <version>${geronimo-transaction.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>${commons-codec.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>${commons-logging.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>${commons-collections.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-core</artifactId>
-            <version>${jackrabbit-core.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-jca</artifactId>
-            <version>${jackrabbit-jca.version}</version>
-            <type>jar</type>
-         </dependency>
-         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-         </dependency>
-      </dependencies>
-   </dependencyManagement>
 
    <dependencies>
       <!-- *********** -->
@@ -89,38 +33,31 @@
       <dependency>
          <groupId>javax.jcr</groupId>
          <artifactId>jcr</artifactId>
-         <version>${jcr.version}</version>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-beans</artifactId>
-         <version>${spring-beans.version}</version>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-core</artifactId>
-         <version>${spring-core.version}</version>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-tx</artifactId>
-         <version>${spring-tx.version}</version>
       </dependency>
       <dependency>
          <groupId>javax.servlet</groupId>
          <artifactId>servlet-api</artifactId>
-         <version>${servlet-api.version}</version>
          <scope>provided</scope>
       </dependency>
       <dependency>
          <groupId>commons-fileupload</groupId>
          <artifactId>commons-fileupload</artifactId>
-         <version>${commons-fileupload.version}</version>
       </dependency>
       <dependency>
          <groupId>commons-httpclient</groupId>
          <artifactId>commons-httpclient</artifactId>
-         <version>${commons-httpclient.version}</version>
          <exclusions>
             <exclusion>
                <artifactId>junit</artifactId>
@@ -135,7 +72,6 @@
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-api</artifactId>
-         <version>${jackrabbit-api.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
@@ -200,13 +136,11 @@
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-jcr-commons</artifactId>
-         <version>${jackrabbit-jcr-commons.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-spi-commons</artifactId>
-         <version>${jackrabbit-spi-commons.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
@@ -217,7 +151,6 @@
       <dependency>
          <groupId>org.apache.tika</groupId>
          <artifactId>tika-parsers</artifactId>
-         <version>${tika-parsers.version}</version>
          <optional>true</optional>
          <exclusions>
             <exclusion>
@@ -253,7 +186,6 @@
       <dependency>
          <groupId>org.apache.tika</groupId>
          <artifactId>tika-core</artifactId>
-         <version>${tika-core.version}</version>
          <optional>true</optional>
       </dependency>
 
@@ -269,25 +201,21 @@
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-test</artifactId>
-         <version>${spring-test.version}</version>
          <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-jcr-rmi</artifactId>
-         <version>${jackrabbit-jcr-rmi.version}</version>
          <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-jms</artifactId>
-         <version>${spring-jms.version}</version>
          <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-webapp</artifactId>
-         <version>${jackrabbit-webapp.version}</version>
          <type>jar</type>
          <scope>test</scope>
          <exclusions>
@@ -308,14 +236,12 @@
       <dependency>
          <groupId>org.apache.jackrabbit</groupId>
          <artifactId>jackrabbit-webdav</artifactId>
-         <version>${jackrabbit-webdav.version}</version>
          <type>jar</type>
          <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>concurrent</groupId>
          <artifactId>concurrent</artifactId>
-         <version>${concurrent.version}</version>
          <type>jar</type>
          <scope>test</scope>
       </dependency>
@@ -331,41 +257,7 @@
                <skip>true</skip>
             </configuration>
          </plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>2.2.1</version>
-            <executions>
-               <execution>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>jar</goal>
-                  </goals>
-               </execution>
-            </executions>
-         </plugin>
       </plugins>
    </build>
-
-   <profiles>
-      <profile>
-         <id>stardust-build</id>
-         <activation>
-            <activeByDefault>false</activeByDefault>
-         </activation>
-         <distributionManagement>
-            <repository>
-               <id>stardust-releases</id>
-               <url>${stardust.maven.releases.repo}</url>
-               <uniqueVersion>false</uniqueVersion>
-            </repository>
-            <snapshotRepository>
-               <id>stardust-snapshots</id>
-               <url>${stardust.maven.snapshots.repo}</url>
-               <uniqueVersion>false</uniqueVersion>
-            </snapshotRepository>
-         </distributionManagement>
-      </profile>
-   </profiles>
 
 </project>

@@ -5,7 +5,7 @@
     are made available under the terms of the Eclipse Public License v1.0
     which accompanies this distribution, and is available at
     http://www.eclipse.org/legal/epl-v10.html
-   
+
     Contributors:
        SunGard CSA LLC - initial API and implementation and/or initial documentation
  -->
@@ -17,13 +17,13 @@
    <info organisation="org.eclipse.stardust.components" module="jcr-vfs" revision="${ipp.version.full}">
       <license name="Eclipse Public License (EPL) - v1.0" url="http://www.eclipse.org/legal/epl-v10.html" />
    </info>
-   
+
    <configurations>
       <conf name="compile" visibility="private" description="Compile Configuration" />
       <!-- default configuration is needed by the IvyDE plugin to resolve the project as a dependency where needed -->
       <conf name="default" />
    </configurations>
-   
+
    <dependencies>
       <!--  ivyDE plugin is using the type which is defined in the remote POM. Therefore it
             downloads a rar file instead of jar -->

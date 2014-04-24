@@ -49,7 +49,7 @@ public class JcrVfsReadonlyAccessControlPolicy implements IAccessControlPolicy
    {
       throw new RepositoryOperationFailedException("Can not modify readonly access control policy.");
    }
-
+   
    public void removeAccessControlEntry(IAccessControlEntry ace)
    {
       throw new RepositoryOperationFailedException("Can not modify readonly access control policy.");
