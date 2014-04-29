@@ -28,8 +28,10 @@ import com.hazelcast.core.Transaction;
 import com.hazelcast.impl.ThreadContext;
 
 public class XAResourceImpl implements XAResource {
+   private final int TX_TIMEOUT_N_A = -1;
+
 	private ManagedConnectionImpl managedConnection;
-	private int transactionTimeout = -1;
+	private int transactionTimeout = TX_TIMEOUT_N_A;
 	private final static Map<Xid, ThreadContext> transactionCache = new ConcurrentHashMap<Xid, ThreadContext>();
 
 	public XAResourceImpl(final ManagedConnectionImpl managedConnectionImpl) {
@@ -45,7 +47,7 @@ public class XAResourceImpl implements XAResource {
 		final Transaction tx = managedConnection.getHazelcastInstance().getTransaction();
 		/* only start tx if not already done */
 		if (Transaction.TXN_STATUS_ACTIVE != tx.getStatus()) {
-		   if (transactionTimeout != -1) {
+		   if (transactionTimeout != TX_TIMEOUT_N_A) {
 		      tx.setTimeout(transactionTimeout * 1000);
 		   }
 			tx.begin();
@@ -169,9 +171,11 @@ public class XAResourceImpl implements XAResource {
 	 * @see javax.transaction.xa.XAResource#getTransactionTimeout()
 	 */
 	public int getTransactionTimeout() throws XAException {
-		managedConnection.log(Level.FINEST, "Get XA transaction timeout: '" + transactionTimeout + "'.");
+	   final int txTimeout = transactionTimeout == TX_TIMEOUT_N_A ? 0 : transactionTimeout;
 
-		return transactionTimeout;
+		managedConnection.log(Level.FINEST, "Get XA transaction timeout: '" + txTimeout + "'.");
+
+		return txTimeout;
 	}
 
 	/**
