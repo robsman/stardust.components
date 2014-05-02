@@ -57,6 +57,7 @@ import org.eclipse.stardust.vfs.impl.jcr.setup.test.JackrabbitTestMethodSetup;
 import org.eclipse.stardust.vfs.impl.utils.CollectionUtils;
 import org.junit.ClassRule;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -355,6 +356,7 @@ public class JcrVfsTest implements IJackrabbitTest
    }
 
    @Test
+   @Ignore
    public void test14FindFilesByContent() throws Exception
    {
       int expectedFileCount = 2;
