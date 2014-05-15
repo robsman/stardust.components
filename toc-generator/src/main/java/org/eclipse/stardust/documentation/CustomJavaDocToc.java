@@ -17,7 +17,7 @@ import java.io.*;
 
 /**
  * Doclet to create Eclipse toc for JavaDoc.
- * 
+ *
  */
 public class CustomJavaDocToc extends Doclet
 {
@@ -79,7 +79,7 @@ public class CustomJavaDocToc extends Doclet
 
 	/**
 	 * Reads options. Custom flags need to be read in the method to be recognized.
-	 * 
+	 *
 	 */
 	private static void readOptions(String[][] options)
 	{
@@ -105,9 +105,8 @@ public class CustomJavaDocToc extends Doclet
 	 * Current scopes are:
 	 * 	engine - for Engine API
 	 * 	spi - for Engine SPI examples
-	 * 	swing - for Swing Portal API
 	 * 	webservices - for Web Services Engine API
-	 * 
+	 *
 	 */
 	public static void setParams()
 	{
@@ -123,12 +122,6 @@ public class CustomJavaDocToc extends Doclet
 			label = "@productnameonly@ Web Services Engine API";
 			docref = "html/reference/api/wsengine/";
 		}
-		else if (scope.equals("swing"))
-		{
-			tocname = "tocswing";
-			label = "@productnameonly@ Swing Portal API";
-			docref = "html/reference/api/tds/";
-		} 
       else if (scope.equals("engine"))
 		{
 			tocname = "tocapi";
@@ -142,10 +135,10 @@ public class CustomJavaDocToc extends Doclet
 			docref = "html/reference/api/" + scope + "/";
       }
 	}
-	
+
 	/**
 	 * Determines number of options for custom flags.
-	 * 
+	 *
 	 */
 	public static int optionLength(String option)
 	{
