@@ -1,0 +1,10 @@
+log4j|log4j|jar||1.2.15-eclipse01|compile|org.eclipse.stardust.engine.carnot-base-report.txt|
+javax.mail|mail|jar||1.4-eclipse01|compile|org.eclipse.stardust.engine.carnot-base-report.txt|
+javax.activation|activation|jar||1.1-eclipse01|compile|org.eclipse.stardust.engine.carnot-base-report.txt|
+commons-collections|commons-collections|jar||3.2-eclipse01|compile|org.eclipse.stardust.engine.carnot-base-report.txt|
+org.apache.geronimo.specs|geronimo-jms_1.1_spec|jar||1.1.1|compile|org.eclipse.stardust.engine.carnot-base-report.txt|
+commons-jxpath|commons-jxpath|jar||1.3-eclipse01|compile|org.eclipse.stardust.engine.carnot-base-report.txt|
+junit|junit|jar||4.11-eclipse01|test|org.eclipse.stardust.engine.carnot-base-report.txt|
+org.hamcrest|hamcrest-core|jar||1.3-eclipse01|test|org.eclipse.stardust.engine.carnot-base-report.txt|
+org.slf4j|slf4j-log4j12|jar||1.5.11|compile|org.eclipse.stardust.engine.logging-slf4j-log4j-module-report.txt|
+org.slf4j|slf4j-api|jar||1.5.11-eclipse01|compile|org.eclipse.stardust.engine.logging-slf4j-log4j-module-report.txt|
