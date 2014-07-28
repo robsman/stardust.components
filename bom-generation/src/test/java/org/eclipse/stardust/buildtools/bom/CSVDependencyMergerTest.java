@@ -93,8 +93,9 @@ public class CSVDependencyMergerTest
       File result = new File(TEST_RESULT_DIR + "/" + TEST_MERGE_OUTPUT_FILE);
       File expected = new File(TEST_EXPECTED_DIR + "/" + TEST_MERGE_OUTPUT_FILE);
 
-      assertEquals("The files differ!", FileUtils.readFileToString(result, "utf-8"),
-            FileUtils.readFileToString(expected, "utf-8"));
+      assertEquals("The files differ!", FileUtils.readFileToString(result, "utf-8")
+            .replaceAll("\\r\\n", "\n"), FileUtils.readFileToString(expected, "utf-8")
+            .replaceAll("\\r\\n", "\n"));
    }
 
 }

@@ -42,6 +42,7 @@ public class BOMGeneratorTest
 
    private static final transient Logger logger = LoggerFactory
          .getLogger(BOMGeneratorTest.class);
+
    @AfterClass
    public static void tearDownAfterClass() throws Exception
    {}
@@ -68,8 +69,9 @@ public class BOMGeneratorTest
       File actual = new File(TEST_RESULT_DIR + TEST_BOM_FILE);
       File expected = new File(TEST_EXPECTED_DIR + TEST_BOM_FILE);
 
-      assertEquals("The files differ!", FileUtils.readFileToString(actual, "utf-8"),
-            FileUtils.readFileToString(expected, "utf-8"));
+      assertEquals("The files differ!", FileUtils.readFileToString(actual, "utf-8")
+            .replaceAll("\\r\\n", "\n"), FileUtils.readFileToString(expected, "utf-8")
+            .replaceAll("\\r\\n", "\n"));
 
    }
 
