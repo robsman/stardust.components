@@ -94,7 +94,7 @@
                         <argument>org.eclipse.stardust.buildtools.bom.BOMGenerator</argument>
                         <argument> ${dependency.report.dir}/mergedDeps.csv</argument>
                         <argument>${dependency.bom-ref.file}</argument>
-                        <argument>${dependency.report.dir}/bom-${ipp.version}.csv</argument>
+                        <argument>${dependency.report.dir}/bom-${project.version}.csv</argument>
                      </arguments>
                   </configuration>
                </execution>
