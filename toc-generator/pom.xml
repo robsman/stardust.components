@@ -21,6 +21,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <product.properties.file>../../product/product-parent/src/main/filters/product.properties</product.properties.file>
   </properties>
 
    <dependencies>
@@ -63,21 +64,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>stardust-build</id>
-      <properties>
-         <product.properties.file>../../product/product-parent/src/main/filters/product.properties</product.properties.file>
-      </properties>
-
-    </profile>
-    <profile>
-      <id>ipp-build</id>
-      <properties>
-         <product.properties.file>../../../sungard/product/product-parent/src/main/filters/product.properties</product.properties.file>
-      </properties>
-    </profile>
-  </profiles>
 
 </project>
