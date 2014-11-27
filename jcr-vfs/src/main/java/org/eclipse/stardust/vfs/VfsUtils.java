@@ -39,6 +39,8 @@ public class VfsUtils
 
    public static final String VERSION_UNVERSIONED = "UNVERSIONED";
 
+   public static final String VERSION_VERSIONED = "VERSIONED";
+
    public static final String VFS_META_DATA_MIXIN = "vfsMetaData";
 
    public static final String VFS_META_DATA = "metaData";

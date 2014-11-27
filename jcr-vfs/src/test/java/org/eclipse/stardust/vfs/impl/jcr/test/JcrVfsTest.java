@@ -687,7 +687,7 @@ public class JcrVfsTest implements IJackrabbitTest
       v1.setOwner("new owner");
       v1.setProperties(Collections.singletonMap("new", "new"));
 //      jcrVfsWithAllPrivileges.retrieveFileContent(v1);
-      v1 = jcrVfsWithAllPrivileges.updateFile(v1,"new content".getBytes(),null, false, null, null, false);
+      jcrVfsWithAllPrivileges.updateFile(v1,"new content".getBytes(),null, false, null, null, false);
       v1.setOwner("new owner");
       v1.setProperties(Collections.singletonMap("new2", "new2"));
 
