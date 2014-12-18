@@ -547,6 +547,8 @@ public class JcrVfsOperations
          }
          JcrRepositoryFile doc = new JcrRepositoryFile(uuid, name, path);
 
+         if (isFrozenNode)
+         {
          final Version version = getVersion(nFile);
          if (null != version)
          {
@@ -559,6 +561,13 @@ public class JcrVfsOperations
             {
                doc.setVersionLabels(Arrays.asList(labels));
             }
+         }
+         }
+         else if (JcrNode.isNodeType(nFile, JcrProperties.MIXIN_VERSIONABLE))
+         {
+            // Mark as versioned, because node has versions.
+            doc.setRevisionId(VfsUtils.VERSION_VERSIONED);
+            doc.setRevisionName(VfsUtils.VERSION_VERSIONED);
          }
 
          updateFileSnapshot(doc, nFile);
@@ -1391,7 +1400,7 @@ public class JcrVfsOperations
       return nFolder;
    }
 
-   public void createFrozenVersion(Node nFile, String versionComment, String versionLabel, boolean moveLabel)
+   public Node createFrozenVersion(Node nFile, String versionComment, String versionLabel, boolean moveLabel)
          throws RepositoryException
    {
       updateVersionComment(nFile, versionComment);
@@ -1467,6 +1476,7 @@ public class JcrVfsOperations
          JcrVersionHistory.addVersionLabel(metaDataHistory,
                JcrItem.getName(frozenMetaData), getRevisionId(version), false);
       }
+      return findFile(getRevisionId(version));
    }
 
    private void clearJackrabbitItemManagerCacheEntry(Node nFile)
