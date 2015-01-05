@@ -16,6 +16,7 @@
 
    <modules>
       <module>jcr-vfs</module>
+      <module>jcr-vfs-factory</module>
    </modules>
    
    <build>

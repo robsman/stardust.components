@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>org.eclipse.stardust</groupId>
+      <artifactId>product-parent</artifactId>
+      <version>9.9.9-SNAPSHOT</version>
+      <relativePath>../../product/product-parent/pom.xml</relativePath>
+   </parent>
+
+   <groupId>org.eclipse.stardust.components</groupId>
+   <artifactId>jcr-vfs-factory</artifactId>
+
+   <name>JCR VFS Spring Factory</name>
+   
+   <dependencies>
+      <dependency>
+         <groupId>org.eclipse.stardust.components</groupId>
+         <artifactId>jcr-vfs</artifactId>
+         <version>${project.version}</version>
+      </dependency>
+      
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-beans</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-tx</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+      </dependency>
+      
+      
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-api</artifactId>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.jackrabbit</groupId>
+         <artifactId>jackrabbit-core</artifactId>
+         <optional>true</optional>
+         <exclusions>
+            <exclusion>
+               <groupId>org.bouncycastle</groupId>
+               <artifactId>bcmail-jdk15</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.bouncycastle</groupId>
+               <artifactId>bcprov-jdk15</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>edu.ucar</groupId>
+               <artifactId>netcdf</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>concurrent</groupId>
+               <artifactId>concurrent</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.derby</groupId>
+               <artifactId>derby</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.pdfbox</groupId>
+               <artifactId>pdfbox</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>com.drewnoakes</groupId>
+               <artifactId>metadata-extractor</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.geronimo.specs</groupId>
+               <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+            </exclusion>
+            <exclusion>
+               <artifactId>tika-core</artifactId>
+               <groupId>org.apache.tika</groupId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+   </dependencies>
+   
+</project>

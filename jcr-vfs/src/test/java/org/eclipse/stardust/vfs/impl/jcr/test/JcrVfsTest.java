@@ -62,7 +62,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-
 /**
  * @author rsauer
  * @version $Revision$
@@ -175,7 +174,7 @@ public class JcrVfsTest implements IJackrabbitTest
    {
       IFolder fNase = jcrVfsWithAllPrivileges.getFolder("/nase");
 
-      LocalFile file1 = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile file1 = VfsSpringUtils.localCpFile("LICENSE.txt");
 
       // in future we might leverage Java activation to derive the content type from the
       // file
@@ -194,7 +193,7 @@ public class JcrVfsTest implements IJackrabbitTest
          file1.closeContentStreams();
       }
 
-      LocalFile file2 = VfsUtils.localCpFile("EPLv1.pdf");
+      LocalFile file2 = VfsSpringUtils.localCpFile("EPLv1.pdf");
       file2.setContentType("application/pdf");
 
       // uploading with a different name
@@ -215,7 +214,7 @@ public class JcrVfsTest implements IJackrabbitTest
    {
       IFolder fNase = jcrVfsWithAllPrivileges.getFolder("/nase");
 
-      LocalFile file1 = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile file1 = VfsSpringUtils.localCpFile("LICENSE.txt");
 
       // in future we might leverage Java activation to derive the content type from the
       // file
@@ -385,7 +384,7 @@ public class JcrVfsTest implements IJackrabbitTest
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       jcrVfsWithAllPrivileges.retrieveFileContent(fHase, baos);
 
-      LocalFile localFile = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile localFile = VfsSpringUtils.localCpFile("LICENSE.txt");
 
       assertEquals(localFile.getSize(), baos.size());
 
@@ -430,7 +429,7 @@ public class JcrVfsTest implements IJackrabbitTest
    @Test
    public void test18RenameFiles() throws Exception
    {
-      LocalFile originalFile = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile originalFile = VfsSpringUtils.localCpFile("LICENSE.txt");
       originalFile.setContentType("text/plain");
       originalFile.setName("LICENSE-original.txt");
 
@@ -479,7 +478,7 @@ public class JcrVfsTest implements IJackrabbitTest
       assertNotNull(v0Popase);
       assertEquals("popase", v0Popase.getName());
 
-      LocalFile originalFile = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile originalFile = VfsSpringUtils.localCpFile("LICENSE.txt");
       try
       {
          originalFile.setContentType("text/plain");
@@ -532,7 +531,7 @@ public class JcrVfsTest implements IJackrabbitTest
    @Test
    public void test21FileVersioning() throws Exception
    {
-      LocalFile originalFile = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile originalFile = VfsSpringUtils.localCpFile("LICENSE.txt");
       originalFile.setContentType("text/plain");
       originalFile.setName("LICENSE.txt");
       originalFile.setProperties(Collections.singletonMap("meta", "meta"));
@@ -653,7 +652,7 @@ public class JcrVfsTest implements IJackrabbitTest
    {
       final String name = "LICENSE_UPDATED.txt";
       jcrVfsWithAllPrivileges.removeFile("/nase/"+name);
-      LocalFile originalFile = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile originalFile = VfsSpringUtils.localCpFile("LICENSE.txt");
       originalFile.setContentType("text/plain");
       originalFile.setName(name);
       originalFile.setProperties(Collections.singletonMap("meta", "meta"));
@@ -1110,7 +1109,7 @@ public class JcrVfsTest implements IJackrabbitTest
          assertEquals(fakeContent[i], updatedContent[i]);
       }
 
-      LocalFile originalFile = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile originalFile = VfsSpringUtils.localCpFile("LICENSE.txt");
       try
       {
          jcrVfsWithAllPrivileges.updateFile(fHase, originalFile.openContentStream(),
@@ -1552,7 +1551,7 @@ public class JcrVfsTest implements IJackrabbitTest
    @Test
    public void test49SetPolicyForVersionedFile() throws Exception
    {
-      LocalFile file1 = VfsUtils.localCpFile("LICENSE.txt");
+      LocalFile file1 = VfsSpringUtils.localCpFile("LICENSE.txt");
       String fileName = "TEST_LICENSE.txt";
 
       // in future we might leverage Java activation to derive the content type from the

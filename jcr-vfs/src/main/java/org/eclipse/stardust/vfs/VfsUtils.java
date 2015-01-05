@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import org.eclipse.stardust.vfs.impl.FileInfo;
 import org.eclipse.stardust.vfs.impl.FolderInfo;
-import org.springframework.core.io.ClassPathResource;
 
 
 /**
@@ -92,11 +91,6 @@ public class VfsUtils
    public static LocalFile localFile(File file, String encoding)
    {
       return new LocalFile(file, encoding);
-   }
-
-   public static LocalFile localCpFile(String filePath) throws IOException
-   {
-      return localFile(new ClassPathResource(filePath).getFile());
    }
 
    /**
