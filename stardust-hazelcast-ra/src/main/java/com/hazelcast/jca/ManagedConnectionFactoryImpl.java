@@ -19,6 +19,7 @@ package com.hazelcast.jca;
 import static java.util.Collections.emptySet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,7 @@ import javax.resource.spi.ResourceAdapterAssociation;
 import javax.security.auth.Subject;
 
 /**
- * This managed connection factory is populated with all 
+ * This managed connection factory is populated with all
  * container-specific configuration and infrastructure
  * @see #setConnectionTracingDetail(boolean)
  * @see #setConnectionTracingEvents(String)
@@ -50,10 +51,10 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 
 	/** Access to this resource adapter instance itself */
 	private ResourceAdapterImpl resourceAdapter;
-	/** Definies which events should be traced 
+	/** Definies which events should be traced
 	 * @see HzConnectionEvent */
 	private Set<HzConnectionEvent> hzConnectionTracingEvents = emptySet();
-	
+
 	/** Should connection events be traced or not
 	 * @see #hzConnectionTracingEvents  */
 	private boolean connectionTracingDetail;
@@ -89,12 +90,12 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 		return new ManagedConnectionImpl(cxRequestInfo, this);
 	}
 
-	/** Getter for the RAR property 'connectionTracingEvents' */ 
+	/** Getter for the RAR property 'connectionTracingEvents' */
 	public String getConnectionTracingEvents() {
 		return this.hzConnectionTracingEvents.toString();
 	}
 
-	/** Setter for the RAR property 'connectionTracingDetails'. 
+	/** Setter for the RAR property 'connectionTracingDetails'.
 	 * This method is called by the container */
 	public void setConnectionTracingDetail(boolean connectionTracingDetail) {
 		this.connectionTracingDetail = connectionTracingDetail;
@@ -104,7 +105,7 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 	public boolean isConnectionTracingDetail() {
 		return connectionTracingDetail;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see javax.resource.spi.ResourceAdapterAssociation#getResourceAdapter()
 	 */
@@ -121,7 +122,7 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 	 */
 	public void setResourceAdapter(ResourceAdapter resourceAdapter) throws ResourceException {
 		assert resourceAdapter != null;
-		
+
 		if (resourceAdapter instanceof ResourceAdapterImpl) {
 			this.resourceAdapter = (ResourceAdapterImpl) resourceAdapter;
 		} else {
@@ -178,14 +179,14 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 		return null;
 	}
 
-	
+
 	/**
 	 * Setter for the property 'connectionTracingEvents'.
 	 * This method is called by the container
 	 * @param tracingSpec A comma delimited list of {@link HzConnectionEvent}
 	 */
 	public void setConnectionTracingEvents(String tracingSpec) {
-		if ((null != tracingSpec) && (0 < tracingSpec.length())) {
+		if ((null != tracingSpec) && (0 < tracingSpec.length()) && !tracingSpec.equals("[]")) {
 			List<HzConnectionEvent> traceEvents = new ArrayList<HzConnectionEvent>();
 
 			for (String traceEventId : tracingSpec.split(",")) {
@@ -204,7 +205,7 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 				}
 			}
 
-			this.hzConnectionTracingEvents = EnumSet.copyOf(traceEvents);
+			this.hzConnectionTracingEvents = traceEvents.isEmpty() ? Collections.<HzConnectionEvent>emptySet() : EnumSet.copyOf(traceEvents);
 		} else {
 			this.hzConnectionTracingEvents = emptySet();
 		}
@@ -214,7 +215,7 @@ public class ManagedConnectionFactoryImpl extends JcaBase implements ManagedConn
 	public String toString() {
 		return "hazelcast.ManagedConnectionFactoryImpl [" + id + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
