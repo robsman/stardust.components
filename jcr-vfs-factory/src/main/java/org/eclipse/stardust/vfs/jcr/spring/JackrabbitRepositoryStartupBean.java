@@ -29,7 +29,7 @@ public class JackrabbitRepositoryStartupBean
    private String repositoryHome;
 
    private ApplicationContext applicationContext;
-   
+
    private boolean bindToJndi;
 
    public JackrabbitRepositoryStartupBean()
@@ -117,7 +117,7 @@ public class JackrabbitRepositoryStartupBean
          {
             ((JackrabbitRepository) repository).shutdown();
          }
-         JackrabbitRepositoryContext.removeRepository(repository);
+         JackrabbitRepositoryContext.removeRepository(jndiName);
       }
    }
 
@@ -171,5 +171,5 @@ public class JackrabbitRepositoryStartupBean
    {
       this.bindToJndi = bindToJndi;
    }
-   
+
 }
