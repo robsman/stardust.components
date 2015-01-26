@@ -31,7 +31,7 @@ public class JackrabbitRepositoryContext
 
       return jndiContext;
    }
-   
+
    public static Repository lookup(String jndiName) throws NamingException
    {
       return (Repository) getJndiContext().lookup(jndiName);
@@ -42,7 +42,7 @@ public class JackrabbitRepositoryContext
       InitialContext context = getJndiContext();
 
       ensureContextsExist(jndiName, context);
-      
+
       try
       {
          context.bind(jndiName, value);
@@ -114,8 +114,8 @@ public class JackrabbitRepositoryContext
       return repositoryContext.get(jndiName);
    }
 
-   public synchronized static void removeRepository(Repository repository)
+   public synchronized static void removeRepository(String jndiName)
    {
-      repositoryContext.remove(repository);
+      repositoryContext.remove(jndiName);
    }
 }

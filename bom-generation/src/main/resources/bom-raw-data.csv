@@ -229,3 +229,13 @@ org.eclipse.birt|scriptapi|4.3.1|EPL
 org.eclipse.birt|viewservlets|4.3.1|EPL
 org.eclipse.xsd|xsd-runtime|2.9.1|EPL
 org.apache.camel|camel-test|2.12.1|8137
+org.apache.camel|camel-core|2.13.1|8513
+org.apache.camel|camel-http|2.13.1|8519
+org.apache.camel|camel-jms|2.13.1|8515
+org.apache.camel|camel-mail|2.13.1|8518
+org.apache.camel|camel-quartz|2.13.1|8516
+org.apache.camel|camel-script|2.13.1|8517
+org.apache.camel|camel-smpp|2.13.1|8553
+org.apache.camel|camel-spring|2.13.1|8514
+org.apache.camel|camel-sql|2.13.1|8520
+org.apache.camel|camel-test|2.13.1|8521
