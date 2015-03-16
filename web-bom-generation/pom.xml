@@ -25,16 +25,19 @@
    </parent>
 
    <dependencies>
+ 
       <dependency>
          <groupId>org.eclipse.stardust.ui.web</groupId>
          <artifactId>ipp-portal-common</artifactId>
          <version>${project.version}</version>
       </dependency>
+<!--  This dependency is used in tomcat7-archetype and is supposed to include all 
+stardust-portal dependencies-->
       <dependency>
-         <groupId>org.eclipse.stardust.ui.web</groupId>
-         <artifactId>ipp-portal</artifactId>
+         <groupId>org.eclipse.stardust.deploy.jee.rtenv</groupId>
+         <artifactId>tomcat70-stardust-portal-war</artifactId>
          <version>${project.version}</version>
-         <type>war</type>
+         <type>pom</type>
       </dependency>
    </dependencies>
    <build>
