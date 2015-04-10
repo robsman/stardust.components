@@ -52,6 +52,7 @@ javax.servlet|servlet-api|2.4|5499
 org.ccil.cowan.tagsoup|tagsoup|1.2|5502
 org.apache.xmlbeans|xmlbeans|2.3.0|5506
 org.tranql|tranql-connector|1.7|5507
+org.apache.pdfbox|jempbox|1.3.1|5514
 commons-digester|commons-digester|1.8|5518
 commons-fileupload|commons-fileupload|1.2.1|5519
 log4j|log4j|1.2.15-eclipse01|5520
@@ -140,7 +141,7 @@ org.eclipse.persistence|javax.persistence|2.0.0|6982
 org.icefaces|icefaces-facelets|1.8.2-r33557-eclipse01|7017
 javax.xml.soap|saaj-api|1.3|7101
 org.icefaces|icefaces|1.8.2-r33557|7135
-org.icefaces|icefaces-comps|1.8.2-r33557|7136
+org.icefaces|icefaces-comps|1.8.2-r33557-eclipse01|7136
 org.icepdf|icepdf-core|5.0.0|7204
 org.apache.tomcat|tomcat-catalina|7.0.35-eclipse01|7392
 commons-dbcp|commons-dbcp|1.4-eclipse01|7393
@@ -208,7 +209,7 @@ org.apache.santuario|xmlsec|1.5.6|7975
 org.apache.ws.security|wss4j|1.6.14|7977
 org.apache.ws.xmlschema|xmlschema-core|2.1.0|7978
 org.codehaus.woodstox|stax2-api|3.1.1|7979
-org.codehaus.woodstox|wstx-asl|4.2.0|7980
+org.codehaus.woodstox|woodstox-core-asl|4.2.0|7980
 wsdl4j|wsdl4j|1.6.3|7981
 javax.ws.rs|javax.ws.rs-api|2.0-m10|7982
 org.apache.cxf|cxf-api|2.7.10-eclipse01|7983
@@ -266,3 +267,4 @@ org.apache.camel|camel-sql|2.14.0|8916
 org.apache.camel|camel-test|2.14.0|8917
 org.apache.camel|camel-smpp|2.14.0|8918
 org.apache.camel|camel-velocity|2.14.0|8919
+org.eclipse.persistence|eclipselink|2.0.0|EPL
