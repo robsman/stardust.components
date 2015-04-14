@@ -268,4 +268,3 @@ org.apache.camel|camel-sql|2.14.0|8916
 org.apache.camel|camel-test|2.14.0|8917
 org.apache.camel|camel-smpp|2.14.0|8918
 org.apache.camel|camel-velocity|2.14.0|8919
-org.eclipse.persistence|eclipselink|2.0.0|EPL
