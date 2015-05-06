@@ -9,7 +9,7 @@ commons-io|commons-io|1.4-eclipse01|5322
 commons-logging|commons-logging|1.1.1-eclipse01|5323
 dom4j|dom4j|1.6.1|5324
 org.apache.geronimo.specs|geronimo-jta_1.1_spec|1.1.1|5330
-javax.servlet|servlet-api|2.5|5331
+javax.servlet|servlet-api|2.5-eclipse01|5331
 xerces|xercesImpl|2.9.0-eclipse01|5332
 commons-collections|commons-collections|3.2-eclipse01|5333
 javax.activation|activation|1.1-eclipse01|5335
@@ -268,4 +268,3 @@ org.apache.camel|camel-sql|2.14.0|8916
 org.apache.camel|camel-test|2.14.0|8917
 org.apache.camel|camel-smpp|2.14.0|8918
 org.apache.camel|camel-velocity|2.14.0|8919
-org.eclipse.persistence|eclipselink|2.0.0|EPL
