@@ -9,7 +9,6 @@ commons-io|commons-io|1.4-eclipse01|5322
 commons-logging|commons-logging|1.1.1-eclipse01|5323
 dom4j|dom4j|1.6.1|5324
 org.apache.geronimo.specs|geronimo-jta_1.1_spec|1.1.1|5330
-javax.servlet|servlet-api|2.5-eclipse01|5331
 xerces|xercesImpl|2.9.0-eclipse01|5332
 commons-collections|commons-collections|3.2-eclipse01|5333
 javax.activation|activation|1.1-eclipse01|5335
@@ -214,7 +213,7 @@ org.codehaus.woodstox|woodstox-core-asl|4.2.0|7980
 wsdl4j|wsdl4j|1.6.3|7981
 javax.ws.rs|javax.ws.rs-api|2.0-m10|7982
 org.apache.cxf|cxf-api|2.7.10-eclipse01|7983
-org.apache.cxf|cxf-rt-bindings-soap|2.7.10|7984
+org.apache.cxf|cxf-rt-bindings-soap|2.7.10-eclipse01|7984
 org.apache.cxf|cxf-rt-bindings-xml|2.7.10|7985
 org.apache.cxf|cxf-rt-core|2.7.10|7986
 org.apache.cxf|cxf-rt-databinding-jaxb|2.7.10|7987
