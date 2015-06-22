@@ -25,6 +25,7 @@
    </parent>
    <properties>
       <dependency.bom-ref.file>${project.build.outputDirectory}/bom-raw-data.csv</dependency.bom-ref.file>
+      <dependency.bom-file.suffix>${project.version}</dependency.bom-file.suffix>
    </properties>
 
    <dependencies>
@@ -94,7 +95,7 @@
                         <argument>org.eclipse.stardust.buildtools.bom.BOMGenerator</argument>
                         <argument> ${dependency.report.dir}/mergedDeps.csv</argument>
                         <argument>${dependency.bom-ref.file}</argument>
-                        <argument>${dependency.report.dir}/bom-${project.version}.csv</argument>
+                        <argument>${dependency.report.dir}/bom-${dependency.bom-file.suffix}.csv</argument>
                      </arguments>
                   </configuration>
                </execution>
