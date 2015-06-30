@@ -9,7 +9,6 @@ commons-io|commons-io|1.4-eclipse01|5322
 commons-logging|commons-logging|1.1.1-eclipse01|5323
 dom4j|dom4j|1.6.1|5324
 org.apache.geronimo.specs|geronimo-jta_1.1_spec|1.1.1|5330
-javax.servlet|servlet-api|2.5|5331
 xerces|xercesImpl|2.9.0-eclipse01|5332
 commons-collections|commons-collections|3.2-eclipse01|5333
 javax.activation|activation|1.1-eclipse01|5335
@@ -35,7 +34,7 @@ com.sun.jersey|jersey-core|1.1.5.1|5365
 javax.annotation|jsr250-api|1.1-eclipse01|5366
 concurrent|concurrent|1.3.4-eclipse01|5371
 backport-util-concurrent|backport-util-concurrent|3.1-eclipse01|5372
-javax.mail|mail|1.4-eclipse01|5391
+javax.mail|mail|1.4|5391
 xalan|xalan|2.7.1-eclipse01|5393
 org.apache.activemq|activemq-core|5.4.2|5394
 net.sourceforge.nekohtml|nekohtml|1.9.14-eclipse01|5444
@@ -143,7 +142,7 @@ org.icefaces|icefaces-facelets|1.8.2-r33557-eclipse01|7017
 javax.xml.soap|saaj-api|1.3|7101
 org.icefaces|icefaces|1.8.2-r33557|7135
 org.icefaces|icefaces-comps|1.8.2-r33557-eclipse01|7136
-org.icepdf|icepdf-core|5.0.0|7204
+org.icepdf|icepdf-core|5.0.0-eclipse01|7204
 org.apache.tomcat|tomcat-catalina|7.0.35-eclipse01|7392
 commons-dbcp|commons-dbcp|1.4-eclipse01|7393
 commons-pool|commons-pool|1.6-eclipse01|7394
@@ -214,7 +213,7 @@ org.codehaus.woodstox|woodstox-core-asl|4.2.0|7980
 wsdl4j|wsdl4j|1.6.3|7981
 javax.ws.rs|javax.ws.rs-api|2.0-m10|7982
 org.apache.cxf|cxf-api|2.7.10-eclipse01|7983
-org.apache.cxf|cxf-rt-bindings-soap|2.7.10|7984
+org.apache.cxf|cxf-rt-bindings-soap|2.7.10-eclipse01|7984
 org.apache.cxf|cxf-rt-bindings-xml|2.7.10|7985
 org.apache.cxf|cxf-rt-core|2.7.10|7986
 org.apache.cxf|cxf-rt-databinding-jaxb|2.7.10|7987
@@ -268,3 +267,5 @@ org.apache.camel|camel-sql|2.14.0|8916
 org.apache.camel|camel-test|2.14.0|8917
 org.apache.camel|camel-smpp|2.14.0|8918
 org.apache.camel|camel-velocity|2.14.0|8919
+org.icepdf|icepdf-core|5.1.1-eclipse01|9240
+org.mozilla|rhino|1.7R5-eclipse01|9740
