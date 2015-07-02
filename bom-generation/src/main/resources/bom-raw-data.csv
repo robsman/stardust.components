@@ -201,7 +201,7 @@ org.apache.camel|camel-script|2.12.1|7676
 org.apache.camel|camel-mail|2.12.1|7677
 org.apache.camel|camel-http|2.12.1|7678
 org.apache.camel|camel-sql|2.12.1|7679
-org.apache.bsf|parent|3.1|7924
+org.apache.bsf|bsf-all|3.1|7924
 com.sun.xml.bind|jaxb-impl|2.2.6|7972
 commons-collections|commons-collections|3.2.1|7973
 commons-lang|commons-lang|2.4-eclipse01|7974
@@ -265,7 +265,6 @@ org.apache.camel|camel-mail|2.14.0|8914
 org.apache.camel|camel-http|2.14.0|8915
 org.apache.camel|camel-sql|2.14.0|8916
 org.apache.camel|camel-test|2.14.0|8917
-org.apache.camel|camel-smpp|2.14.0|8918
 org.apache.camel|camel-velocity|2.14.0|8919
 org.icepdf|icepdf-core|5.1.1-eclipse01|9240
 org.mozilla|rhino|1.7R5-eclipse01|9740
