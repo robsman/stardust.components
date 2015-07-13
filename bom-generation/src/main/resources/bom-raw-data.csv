@@ -252,6 +252,7 @@ fr.opensagres.xdocreport|org.apache.poi.xwpf.converter.core|1.0.4|8900
 fr.opensagres.xdocreport|org.apache.poi.xwpf.converter.pdf|1.0.4|8901
 fr.opensagres.xdocreport|fr.opensagres.xdocreport.converter|1.0.4|8902
 fr.opensagres.xdocreport|fr.opensagres.xdocreport.core|1.0.4|8903
+fr.opensagres.xdocreport|fr.opensagres.xdocreport.document|1.0.4-eclipse01|8904
 fr.opensagres.xdocreport|fr.opensagres.xdocreport.document.docx|1.0.4|8905
 fr.opensagres.xdocreport|fr.opensagres.xdocreport.template|1.0.4|8906
 fr.opensagres.xdocreport|fr.opensagres.xdocreport.template.velocity|1.0.4|8907
