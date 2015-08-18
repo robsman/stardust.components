@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="infinity-jai_imageio-1.1.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/jai-imageio-core/infinity-jai-imageio-core.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/ipp-jai-imageio-core/src/main/resources/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{EXIFInteroperabilityTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.common"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.stream{FileChannelImageOutputStream.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFField.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.plugins.pnm"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{EXIFTIFFTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{BaselineTIFFTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFDecompressor.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.plugins.raw"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFColorConverter.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.stream{RawImageInputStream.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFImageReadParam.java"/>
+        <file path="/jai-imageio-core/src/main/java/com/sun/media/imageio/plugins/bmp/properties"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.stream{StreamSegment.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{EXIFGPSTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.stream{I18N.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{EXIFParentTIFFTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.stream{SegmentedImageInputStream.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFTag.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.pnm{PNMImageWriteParam.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFImageWriteParam.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.plugins.bmp"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/resources"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.stream"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.plugins.gif"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{GeoTIFFTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.stream{FileChannelImageInputStream.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.stream{StreamSegmentMapper.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFDirectory.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.bmp{I18N.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.plugins.wbmp"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{TIFFCompressor.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageioimpl.plugins.tiff"/>
+        <file path="/jai-imageio-core/src/main/java/com/sun/media/imageio/stream/properties"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.tiff{FaxTIFFTagSet.java"/>
+        <javaElement handleIdentifier="=jai-imageio-core/src\/main\/java&lt;com.sun.media.imageio.plugins.bmp{BMPImageWriteParam.java"/>
+    </selectedElements>
+</jardesc>

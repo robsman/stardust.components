@@ -493,9 +493,9 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
             jcrVfs.ensureVersioningIsEnabled(nFile);
             JcrVfsOperations.ensureVersionIsModifiable(nFile);
 
-            jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, moveLabel);
+            Node version = jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, moveLabel);
 
-            return jcrVfs.getFileSnapshot(nFile);
+            return jcrVfs.getFileSnapshot(version);
          }
       });
    }
@@ -551,7 +551,8 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
 
             if (version)
             {
-               jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, false);
+               Node versionNode = jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, false);
+               return jcrVfs.getFileSnapshot(versionNode);
             }
 
             return jcrVfs.getFileSnapshot(nFile);
@@ -597,7 +598,8 @@ public abstract class AbstractJcrDocumentRepositoryService extends AbstractDocum
 
             if (version)
             {
-               jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, false);
+               Node versionNode = jcrVfs.createFrozenVersion(nFile, versionComment, versionLabel, false);
+               return jcrVfs.getFileSnapshot(versionNode);
             }
 
             return jcrVfs.getFileSnapshot(nFile);
