@@ -275,4 +275,5 @@ org.icepdf|icepdf-core|5.1.1-eclipse01|9240
 javax.servlet|servlet-api|2.5|9610
 org.mozilla|rhino|1.7R5-eclipse01|9740
 org.mozilla|rhino|1.7.6|9741
+com.sun.xml.bind|jaxb-xjc|2.2.6|9839
 org.apache.neethi|neethi|3.0.3|9846
