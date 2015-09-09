@@ -122,7 +122,7 @@ com.hazelcast|hazelcast-ra|2.4-eclipse01|6912
 org.apache.ant|ant-commons-net|1.7.0-eclipse01|6964
 org.apache.ant|ant-launcher|1.7.0-eclipse01|6964
 org.apache.ant|ant|1.7.0-eclipse01|6964
-commons-beanutils|commons-beanutils|1.8.0-eclipse01|6966
+commons-beanutils|commons-beanutils|1.8.0|6966
 org.apache.geronimo.specs|geronimo-j2ee-management_1.0_spec|1.0|6968
 javax.servlet|jsp-api|2.0|6969
 org.apache.derby|derby|10.8.2.2|6970
