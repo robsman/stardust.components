@@ -277,3 +277,8 @@ org.mozilla|rhino|1.7R5-eclipse01|9740
 org.mozilla|rhino|1.7.6|9741
 com.sun.xml.bind|jaxb-xjc|2.2.6|9839
 org.apache.neethi|neethi|3.0.3|9846
+org.apache.chemistry.opencmis|chemistry-opencmis-client-api|0.13.0|9915
+org.apache.chemistry.opencmis|chemistry-opencmis-client-bindings|0.13.0|9916
+org.apache.chemistry.opencmis|chemistry-opencmis-client-impl|0.13.0|9917
+org.apache.chemistry.opencmis|chemistry-opencmis-commons-api|0.13.0|9918
+org.apache.chemistry.opencmis|chemistry-opencmis-commons-impl|0.13.0|9919
