@@ -270,6 +270,7 @@ org.apache.camel|camel-mail|2.14.0|8914
 org.apache.camel|camel-http|2.14.0|8915
 org.apache.camel|camel-sql|2.14.0|8916
 org.apache.camel|camel-test|2.14.0|8917
+org.apache.camel|camel-smpp|2.14.0|8918
 org.apache.camel|camel-velocity|2.14.0|8919
 org.icepdf|icepdf-core|5.1.1-eclipse01|9240
 javax.servlet|servlet-api|2.5|9610
