@@ -283,3 +283,4 @@ org.apache.chemistry.opencmis|chemistry-opencmis-client-bindings|0.13.0|9916
 org.apache.chemistry.opencmis|chemistry-opencmis-client-impl|0.13.0|9917
 org.apache.chemistry.opencmis|chemistry-opencmis-commons-api|0.13.0|9918
 org.apache.chemistry.opencmis|chemistry-opencmis-commons-impl|0.13.0|9919
+commons-codec|commons-codec|1.4|10653
