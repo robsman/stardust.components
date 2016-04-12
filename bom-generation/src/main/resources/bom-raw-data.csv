@@ -6,6 +6,7 @@ commons-discovery|commons-discovery|0.4|5318
 commons-el|commons-el|1.0-eclipse01|5319
 commons-httpclient|commons-httpclient|3.0|5321
 commons-io|commons-io|1.4-eclipse01|5322
+commons-logging|commons-logging|1.2|10952
 commons-logging|commons-logging|1.1.1-eclipse01|5323
 dom4j|dom4j|1.6.1|5324
 org.apache.geronimo.specs|geronimo-jta_1.1_spec|1.1.1|5330
@@ -181,6 +182,19 @@ org.apache.tika|tika-core|1.3-eclipse01|7495
 org.apache.tika|tika-parsers|1.3-eclipse01|7496
 org.apache.tika|tika-core|1.1|7539
 org.apache.tika|tika-parsers|1.1|7540
+org.springframework|spring-aop|3.2.16.RELEASE|10929
+org.springframework|spring-beans|3.2.16.RELEASE|10930
+org.springframework|spring-context-support|3.2.16.RELEASE|10931
+org.springframework|spring-context|3.2.16.RELEASE|10932
+org.springframework|spring-core|3.2.16.RELEASE|10933
+org.springframework|spring-expression|3.2.16.RELEASE|10934
+org.springframework|spring-jdbc|3.2.16.RELEASE|10935
+org.springframework|spring-jms|3.2.16.RELEASE|10936
+org.springframework|spring-orm|3.2.16.RELEASE|10937
+org.springframework|spring-tx|3.2.16.RELEASE|10938
+org.springframework|spring-web|3.2.16.RELEASE|10939
+org.springframework|spring-webmvc|3.2.16.RELEASE|10940
+org.springframework|spring-test|3.2.16.RELEASE|10941
 org.springframework|spring-aop|3.2.4.RELEASE|7542
 org.springframework|spring-beans|3.2.4.RELEASE|7543
 org.springframework|spring-context-support|3.2.4.RELEASE|7544
