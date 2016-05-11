@@ -120,7 +120,7 @@
 				 <goal>run</goal>
 			  </goals>
 			  <configuration>
-				<target name="copy and merge license report files">			  
+				<target name="copy-merge-license-files">			  
 					<sequential>
 						<copy todir="${license.output.location}" flatten="true">
 							<fileset dir="${license.build.directory}">
