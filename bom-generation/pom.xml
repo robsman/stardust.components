@@ -126,9 +126,6 @@
 							<fileset dir="${license.build.directory}">
 								<include name="**/*license-report.txt"/>
 							</fileset>
-							<filterset begintoken="%" endtoken="*">
-								<filter token="DATE" value="${TODAY}"/>
-							</filterset>
 						</copy>		
 						
 						<tempfile property="temp.file" prefix="ant.merge." deleteonexit="true"/>
