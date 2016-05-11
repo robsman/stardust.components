@@ -108,6 +108,56 @@
                <skipTests>false</skipTests>
             </configuration>
          </plugin>
+		<plugin>
+		   <groupId>org.apache.maven.plugins</groupId>
+		   <artifactId>maven-antrun-plugin</artifactId>
+		   <version>1.7</version>
+		   <executions>
+			  <execution>
+			  <id>copy-merge-license-report-files</id>
+			  <phase>compile</phase>
+			  <goals>
+				 <goal>run</goal>
+			  </goals>
+			  <configuration>
+				<target name="copy and merge license report files">			  
+					<sequential>
+						<copy todir="${license.output.location}" flatten="true">
+							<fileset dir="${license.build.directory}">
+								<include name="**/*license-report.txt"/>
+							</fileset>
+							<filterset begintoken="%" endtoken="*">
+								<filter token="DATE" value="${TODAY}"/>
+							</filterset>
+						</copy>		
+						
+						<tempfile property="temp.file" prefix="ant.merge." deleteonexit="true"/>
+					   
+						<concat destfile="${temp.file}" fixlastline="true">
+							<fileset dir="${license.output.location}"/>
+						</concat>
+					   
+						<copy file="${temp.file}" tofile="${license.output.location}/license-report.txt">
+							<filterchain>
+								<tokenfilter>
+									<linetokenizer/>
+								</tokenfilter>
+								<sortfilter/>
+								<uniqfilter/>
+								<linecontainsregexp negate="true">
+									<regexp pattern="Lists of *"/>
+								</linecontainsregexp>
+								<linecontains negate="true">
+									<contains value="The project has no dependencies."/>
+								</linecontains>
+							</filterchain>
+						</copy>
+					</sequential>
+				 </target>
+			  </configuration>                       
+		   </execution> 
+		 </executions>
+		</plugin>
       </plugins>
    </build>
 </project>
