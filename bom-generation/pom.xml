@@ -128,7 +128,7 @@
 							</fileset>
 						</copy>		
 						
-						<tempfile property="temp.file" prefix="ant.merge." deleteonexit="true"/>
+						<tempfile property="temp.file" destDir="${license.output.location}" prefix="ant.merge" />
 					   
 						<concat destfile="${temp.file}" fixlastline="true">
 							<fileset dir="${license.output.location}"/>
