@@ -120,6 +120,7 @@
 				 <goal>run</goal>
 			  </goals>
 			  <configuration>
+				<skip>${skipLicenseReport}</skip>
 				<target name="copy-merge-license-files">			  
 					<sequential>
 						<copy todir="${license.output.location}" flatten="true">
@@ -128,7 +129,7 @@
 							</fileset>
 						</copy>		
 						
-						<tempfile property="temp.file" destDir="${license.output.location}" prefix="ant.merge" />
+						<tempfile property="temp.file" destDir="${license.output.location}" prefix="ant.merge" deleteonexit="true"/>
 					   
 						<concat destfile="${temp.file}" fixlastline="true">
 							<fileset dir="${license.output.location}"/>
@@ -151,7 +152,7 @@
 						</copy>
 					</sequential>
 				 </target>
-			  </configuration>                       
+			  </configuration>
 		   </execution> 
 		 </executions>
 		</plugin>
