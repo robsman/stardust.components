@@ -120,18 +120,16 @@
 				 <goal>run</goal>
 			  </goals>
 			  <configuration>
-				<target name="copy and merge license report files">			  
+				<skip>${skipLicenseReport}</skip>
+				<target name="copy-merge-license-files">			  
 					<sequential>
 						<copy todir="${license.output.location}" flatten="true">
 							<fileset dir="${license.build.directory}">
 								<include name="**/*license-report.txt"/>
 							</fileset>
-							<filterset begintoken="%" endtoken="*">
-								<filter token="DATE" value="${TODAY}"/>
-							</filterset>
 						</copy>		
 						
-						<tempfile property="temp.file" prefix="ant.merge." deleteonexit="true"/>
+						<tempfile property="temp.file" destDir="${license.output.location}" prefix="ant.merge" deleteonexit="true"/>
 					   
 						<concat destfile="${temp.file}" fixlastline="true">
 							<fileset dir="${license.output.location}"/>
@@ -154,7 +152,7 @@
 						</copy>
 					</sequential>
 				 </target>
-			  </configuration>                       
+			  </configuration>
 		   </execution> 
 		 </executions>
 		</plugin>
