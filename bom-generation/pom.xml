@@ -26,6 +26,7 @@
    <properties>
       <dependency.bom-ref.file>${project.build.outputDirectory}/bom-raw-data.csv</dependency.bom-ref.file>
       <dependency.bom-file.suffix>${project.version}</dependency.bom-file.suffix>
+	  <license-file.suffix>${project.version}</license-file.suffix>
    </properties>
 
    <dependencies>
@@ -135,7 +136,7 @@
 							<fileset dir="${license.report.dir}"/>
 						</concat>
 					   
-						<copy file="${temp.file}" tofile="${license.report.dir}/license-report.txt">
+						<copy file="${temp.file}" tofile="${license.report.dir}/license-report-${license-file.suffix}.txt">
 							<filterchain>
 								<tokenfilter>
 									<linetokenizer/>
