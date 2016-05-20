@@ -26,6 +26,7 @@
    <properties>
       <dependency.bom-ref.file>${project.build.outputDirectory}/bom-raw-data.csv</dependency.bom-ref.file>
       <dependency.bom-file.suffix>${project.version}</dependency.bom-file.suffix>
+	  <license-file.suffix>${project.version}</license-file.suffix>
    </properties>
 
    <dependencies>
@@ -123,19 +124,19 @@
 				<skip>${skipLicenseReport}</skip>
 				<target name="copy-merge-license-files">			  
 					<sequential>
-						<copy todir="${license.output.location}" flatten="true">
+						<!--copy todir="${license.output.location}" flatten="true">
 							<fileset dir="${license.build.directory}">
 								<include name="**/*license-report.txt"/>
 							</fileset>
-						</copy>		
+						</copy-->		
 						
-						<tempfile property="temp.file" destDir="${license.output.location}" prefix="ant.merge" deleteonexit="true"/>
+						<tempfile property="temp.file" destDir="${license.report.dir}" prefix="ant.merge" deleteonexit="true"/>
 					   
 						<concat destfile="${temp.file}" fixlastline="true">
-							<fileset dir="${license.output.location}"/>
+							<fileset dir="${license.report.dir}"/>
 						</concat>
 					   
-						<copy file="${temp.file}" tofile="${license.output.location}/license-report.txt">
+						<copy file="${temp.file}" tofile="${license.report.dir}/license-report-${license-file.suffix}.txt">
 							<filterchain>
 								<tokenfilter>
 									<linetokenizer/>
