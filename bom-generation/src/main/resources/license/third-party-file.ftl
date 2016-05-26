@@ -44,7 +44,7 @@
 <#if dependencyMap?size == 0>
 The project has no dependencies.
 <#else>
-Name;ArtifactId;GroupId;Version;projectURL;Licenses
+Name;GroupId;ArtifactId;Version;projectURL;License1;License2;License3
     <#list dependencyMap as e>
         <#assign project = e.getKey()/>
         <#assign licenses = e.getValue()/>
