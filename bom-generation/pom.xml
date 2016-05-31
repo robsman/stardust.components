@@ -122,7 +122,7 @@
 			  </goals>
 			  <configuration>
 				<skip>${skipLicenseReport}</skip>
-				<target name="copy-merge-license-files">			  
+				<target name="merge-license-files">			  
 					<sequential>
 						<!--copy todir="${license.output.location}" flatten="true">
 							<fileset dir="${license.build.directory}">
@@ -136,7 +136,7 @@
 							<fileset dir="${license.report.dir}"/>
 						</concat>
 					   
-						<copy file="${temp.file}" tofile="${license.report.dir}/license-report-${license-file.suffix}.txt">
+						<copy file="${temp.file}" tofile="${license.report.dir}/license-report-${license-file.suffix}.csv">
 							<filterchain>
 								<tokenfilter>
 									<linetokenizer/>
